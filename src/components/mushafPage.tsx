@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { bookBase64 as placeHolder } from "@/asset/bookBase64";
 import usePageOverlay from "@/hooks/usePageOverlay";
 import AyaPopup from "./ayaPopup";
@@ -14,8 +14,8 @@ type Props = {
 };
 
 export default function MushafPage({ index }: Props) {
-  const pageImageRef = React.useRef<HTMLImageElement>(null);
-  const [mushafPage, setMushafPage] = React.useState<{
+  const pageImageRef = useRef<HTMLImageElement>(null);
+  const [mushafPage, setMushafPage] = useState<{
     width: number;
     height: number;
   }>({ width: pageWidth, height: pageHeight });
@@ -23,11 +23,6 @@ export default function MushafPage({ index }: Props) {
   const { overlay, selectedAya, show, setShow } = usePageOverlay(Number(index));
 
   useEffect(() => {
-    console.log(
-      "pageImageRef",
-      pageImageRef.current?.width,
-      pageImageRef.current?.height
-    );
     setMushafPage({
       width: pageImageRef.current?.width || pageWidth,
       height: pageImageRef.current?.height || pageHeight,
@@ -36,21 +31,24 @@ export default function MushafPage({ index }: Props) {
   return (
     <div className="relative flex justify-center items-center w-full max-w-[500px] min-h-96 p-0 m-0">
       {...overlay}
-      <Image
-        ref={pageImageRef}
-        src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
-        alt="image"
-        width={pageWidth}
-        height={pageHeight}
-        className="w-full h-full m-0 p-0 border border-red-700"
-        onLoad={() => {
-          setSelectedPage(Number(index));
-        }}
-        priority
-        quality={100}
-        blurDataURL={placeHolder}
-        placeholder="blur"
-      />
+      <div className="w-full h-full m-0 p-0 flex flex-col items-center justify-center">
+        <Image
+          ref={pageImageRef}
+          src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
+          alt="image"
+          width={pageWidth}
+          height={pageHeight}
+          className="w-full h-full m-0 p-0"
+          onLoad={() => {
+            setSelectedPage(Number(index));
+          }}
+          priority
+          quality={100}
+          blurDataURL={placeHolder}
+          placeholder="blur"
+        />
+        <span className="text-gray-500 ">الصفحة {index}</span>
+      </div>
       {show ? (
         <AyaPopup
           aya={selectedAya.aya}

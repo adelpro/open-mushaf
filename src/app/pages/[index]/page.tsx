@@ -36,7 +36,6 @@ export default function Page({ params }: { params: { index: string } }) {
   return (
     <div className="flex flex-col justify-center items-center m-5">
       <ListHeader />
-      <h1 className="text-3xl text-center mt-5">الصفحة {index}</h1>
       {number && (
         <h2 className="text-2xl text-center">
           {surahdata[Number(number) - 1].name}
