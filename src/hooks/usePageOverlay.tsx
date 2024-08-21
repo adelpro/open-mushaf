@@ -1,4 +1,10 @@
 import { coordinateElMadinaWarshAzrak } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/aya";
+import {
+  lineHeight,
+  marginX,
+  marginY,
+  pageWidth,
+} from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
 import { Aya, Page } from "@/types";
 import { useState } from "react";
 
@@ -12,14 +18,8 @@ const usePageOverlay = (index: number) => {
     sura: 0,
   });
   const [show, setShow] = useState<boolean>(false);
-  // Constants for mushaf-madina-warch-azrak
-  const margeX = 100;
-  const margeY = 100;
-  const pageWidth = 430;
-  // const pageHeight = 616;
-  const lineHeight = 40;
 
-  let prevX = margeX;
+  let prevX = marginX;
   let overlay: JSX.Element[] = [];
 
   const page: Page = coordinateElMadinaWarshAzrak[Number(index)];
@@ -30,16 +30,18 @@ const usePageOverlay = (index: number) => {
   page.map((aya: Aya) => {
     const X: number = aya[2];
     const Y: number = aya[3];
+
     // Drawing overlay for aya line (first part before the aya marker)
     const div = (
       <div
-        className={`absolute h-10 cursor-pointer z-10`}
+        className={`absolute cursor-pointer`}
         data-aya={aya[1]}
         data-sura={aya[0]}
         style={{
           top: `${X}px`,
-          left: `${Y - margeY}px`,
-          width: `${pageWidth + margeY - Y}px`,
+          left: `${Y - marginY}px`,
+          width: `${pageWidth + marginY - Y}px`,
+          height: `${lineHeight}px`,
           backgroundColor: `${
             show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
               ? "rgba(128, 128, 128, 0.5)"
@@ -56,12 +58,13 @@ const usePageOverlay = (index: number) => {
         <div
           data-aya={aya[1] + 1}
           data-sura={aya[0]}
-          className={`absolute h-10 cursor-pointer z-10`}
+          className={`absolutecursor-pointer`}
           onClick={() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })}
           style={{
             top: `${X}px`,
-            left: `${margeY}px`,
-            width: `${Y - margeY * 2}px`,
+            left: `${marginY}px`,
+            width: `${Y - marginY * 2}px`,
+            height: `${lineHeight}px`,
             backgroundColor: `${
               show &&
               selectedAya.aya === aya[1] + 1 &&
@@ -77,18 +80,18 @@ const usePageOverlay = (index: number) => {
 
     // Drawing overlay for multiple-line aya
     const numberOfLines: number = Math.ceil((X - prevX) / lineHeight);
-    // console.log("aya", aya[1], "numberOfLines", numberOfLines, "x", X, "Y", Y);
     if (numberOfLines > 1) {
       const fullDiv = (x: number) => (
         <div
           data-aya={aya[1]}
           data-sura={aya[0]}
           onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
-          className={`absolute h-10 cursor-pointer z-10`}
+          className={`absolute cursor-pointer`}
           style={{
             top: `${x}px`,
-            left: `${margeY}px`,
-            width: `${pageWidth - margeY}px`,
+            left: `${marginY}px`,
+            width: `${pageWidth - marginY}px`,
+            height: `${lineHeight}px`,
             backgroundColor: `${
               show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
                 ? "rgba(128, 128, 128, 0.5)"

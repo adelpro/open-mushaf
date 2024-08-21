@@ -29,16 +29,15 @@ export default function MushafPage({ index }: Props) {
     });
   }, []);
   return (
-    <div className="relative flex justify-center items-center w-full max-w-[500px] min-h-96 p-0 m-0">
-      {...overlay}
-      <div className="w-full h-full m-0 p-0 flex flex-col items-center justify-center">
+    <div className="relative flex flex-col justify-center items-center w-full max-w-[500px] min-h-96 p-0 m-0 border border-red-600">
+      <div className="w-full h-full items-center justify-center border border-green-600">
         <Image
           ref={pageImageRef}
           src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
           alt="image"
-          width={pageWidth}
-          height={pageHeight}
-          className="w-full h-full m-0 p-0"
+          width={100}
+          height={130}
+          className="w-full h-full object-cover"
           onLoad={() => {
             setSelectedPage(Number(index));
           }}
@@ -47,8 +46,9 @@ export default function MushafPage({ index }: Props) {
           blurDataURL={placeHolder}
           placeholder="blur"
         />
-        <span className="text-gray-500 ">الصفحة {index}</span>
       </div>
+      <span className="text-gray-500 ">الصفحة {index}</span>
+      <div className="items-center justify-center">{...overlay}</div>
       {show ? (
         <AyaPopup
           aya={selectedAya.aya}
