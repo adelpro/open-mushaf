@@ -12,6 +12,18 @@ An open source implementation of the Quran mushaf in [typescript](https://www.ty
 
 ## Screenshots
 
+![mushaf page](/public/screenshots/mushaf-page.png)
+
+![tafseer popup](/public/screenshots/tafseer-popup.png)
+
+![Sura index mobile](/public/screenshots/sura-index-mobile.png)
+
+![Sura index desktop](/public/screenshots/sura-index-desktop.png)
+
+![Juz index mobile](/public/screenshots/juz-index-mobile.png)
+
+![Juz index desktop](/public/screenshots/juz-index-desktop.png)
+
 ## Installation
 
 First, install the dependencies:
