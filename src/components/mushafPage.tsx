@@ -8,12 +8,19 @@ import {
   defaultPageHeight,
   defaultPageWidth,
 } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
+import useSwipe from "@/hooks/useSwipe";
+import { useRouter } from "next/navigation";
 
 type Props = {
   index: string;
 };
 
 export default function MushafPage({ index }: Props) {
+  const router = useRouter();
+  const swipeHandlers = useSwipe({
+    onSwipedLeft: () => router.push(`/pages/${Number(index) - 1}`),
+    onSwipedRight: () => router.push(`/pages/${Number(index) + 1}`),
+  });
   const pageImageRef = useRef<HTMLImageElement>(null);
   const [mushafPage, setMushafPage] = useState<{
     width: number;
@@ -40,7 +47,10 @@ export default function MushafPage({ index }: Props) {
     });
   }, []);
   return (
-    <div className="relative flex flex-col justify-center items-center w-full max-w-[500px] min-h-96 inset-0">
+    <div
+      className="relative flex flex-col justify-center items-center w-full max-w-[500px] min-h-96 inset-0"
+      {...swipeHandlers}
+    >
       <div className="w-full items-center justify-center">
         <Image
           ref={pageImageRef}
