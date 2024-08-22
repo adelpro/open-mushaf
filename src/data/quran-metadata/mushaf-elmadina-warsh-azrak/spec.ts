@@ -1,11 +1,17 @@
-const pageHeight = 616;
-const marginX = 20;
+const defaultPageHeight = 616;
+const defaultMarginX = 20;
 
-const pageWidth = 430;
-const marginY = 20;
+const defaultPageWidth = 430;
+const defaultMarginY = 20;
 
-const lineHeight = 40;
+const defaultLineHeight = 40;
+const defaultNumberOfPages = 604;
 
-const numberOfPages = 604;
-
-export { pageHeight, marginX, pageWidth, marginY, lineHeight, numberOfPages };
+export {
+  defaultPageHeight,
+  defaultMarginX,
+  defaultPageWidth,
+  defaultMarginY,
+  defaultLineHeight,
+  defaultNumberOfPages,
+};

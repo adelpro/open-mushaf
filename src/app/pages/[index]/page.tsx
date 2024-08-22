@@ -6,7 +6,7 @@ import ListHeader from "@/components/listHeader";
 import MushafPage from "@/components/mushafPage";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useRouter } from "next/navigation";
-import { numberOfPages } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
+import { defaultNumberOfPages } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
 
 export default function Page({ params }: { params: { index: string } }) {
   const router = useRouter();
@@ -19,13 +19,13 @@ export default function Page({ params }: { params: { index: string } }) {
     router.push("/pages/1");
   }
 
-  if (Number(index) > numberOfPages) {
-    router.push(`/pages/${numberOfPages}`);
+  if (Number(index) > defaultNumberOfPages) {
+    router.push(`/pages/${defaultNumberOfPages}`);
   }
   //
 
   useHotkeys("ArrowLeft", () => {
-    if (Number(index) >= numberOfPages) return;
+    if (Number(index) >= defaultNumberOfPages) return;
     router.push(`/pages/${Number(index) + 1}`);
   });
   useHotkeys("ArrowRight", () => {

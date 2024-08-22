@@ -5,8 +5,8 @@ import usePageOverlay from "@/hooks/usePageOverlay";
 import AyaPopup from "./ayaPopup";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import {
-  pageHeight,
-  pageWidth,
+  defaultPageHeight,
+  defaultPageWidth,
 } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
 
 type Props = {
@@ -18,25 +18,36 @@ export default function MushafPage({ index }: Props) {
   const [mushafPage, setMushafPage] = useState<{
     width: number;
     height: number;
-  }>({ width: pageWidth, height: pageHeight });
+  }>({ width: defaultPageWidth, height: defaultPageHeight });
+
   const [_, setSelectedPage] = useLocalStorage<Number>("selectedPage", 1);
-  const { overlay, selectedAya, show, setShow } = usePageOverlay(Number(index));
+
+  //TODO add custom width and height from mushafPage state
+
+  const dimensions = {
+    customPageWidth: mushafPage.width,
+    customPageHeight: mushafPage.height,
+  };
+  const { overlay, selectedAya, show, setShow } = usePageOverlay({
+    index: Number(index),
+    dimensions,
+  });
 
   useEffect(() => {
     setMushafPage({
-      width: pageImageRef.current?.width || pageWidth,
-      height: pageImageRef.current?.height || pageHeight,
+      width: pageImageRef.current?.width || defaultPageWidth,
+      height: pageImageRef.current?.height || defaultPageHeight,
     });
   }, []);
   return (
-    <div className="relative flex flex-col justify-center items-center w-full max-w-[500px] min-h-96 p-0 m-0 border border-red-600">
-      <div className="w-full h-full items-center justify-center border border-green-600">
+    <div className="relative flex flex-col justify-center items-center w-full max-w-[500px] min-h-96 inset-0">
+      <div className="w-full items-center justify-center">
         <Image
           ref={pageImageRef}
           src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
           alt="image"
-          width={100}
-          height={130}
+          width={defaultPageWidth}
+          height={defaultPageHeight}
           className="w-full h-full object-cover"
           onLoad={() => {
             setSelectedPage(Number(index));
