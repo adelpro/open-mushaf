@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Amiri } from "next/font/google";
 import "./globals.css";
+import NavMenu from "@/components/navMenu";
 
 const amiri = Amiri({ weight: ["400", "700"], subsets: ["arabic"] });
 const rtl = true;
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir={`${rtl ? "rtl" : "ltr"}`}>
-      <body className={amiri.className}>{children}</body>
+      <body className={amiri.className}>
+        <NavMenu />
+        {children}
+      </body>
     </html>
   );
 }

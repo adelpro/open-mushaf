@@ -130,7 +130,7 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
       >
         {/* Resize Button */}
         <button
-          className=" w-full flex flex-col justify-center items-center cursor-s-resize"
+          className=" w-full flex flex-col justify-center items-center cursor-s-resize p-1"
           onMouseDown={startResize}
           aria-label="Resize"
         >

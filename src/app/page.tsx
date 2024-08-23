@@ -1,6 +1,4 @@
 "use client";
-
-import ListHeader from "@/components/listHeader";
 import SurahList from "../components/surahList";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
@@ -13,7 +11,6 @@ export default function Home() {
   }
   return (
     <main className="min-h-screen p-5 sm:p-10 md:p-24">
-      <ListHeader />
       <SurahList />
     </main>
   );

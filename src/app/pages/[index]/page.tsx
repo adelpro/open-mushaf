@@ -2,7 +2,6 @@
 
 import surahdata from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json";
 import { useSearchParams } from "next/navigation";
-import ListHeader from "@/components/listHeader";
 import MushafPage from "@/components/mushafPage";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useRouter } from "next/navigation";
@@ -35,7 +34,6 @@ export default function Page({ params }: { params: { index: string } }) {
 
   return (
     <div className="flex flex-col justify-center items-center m-5">
-      <ListHeader />
       {number && (
         <h2 className="text-2xl text-center">
           {surahdata[Number(number) - 1].name}
