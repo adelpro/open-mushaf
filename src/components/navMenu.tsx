@@ -22,12 +22,12 @@ export default function NavMenu() {
       />
       <nav
         className={cn(
-          "fixed top-0 right-0 mt-10 h-full rounded-l-xl w-64 bg-gray-800 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-30 pt-20",
+          "fixed top-0 right-0 h-full rounded-l-xl w-64 bg-gray-800 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-30 pt-16 mt-2",
           { "translate-x-0": isOpen }
         )}
         aria-hidden={!isOpen}
       >
-        <ul className="flex flex-col mt-6 space-y-4 px-4">
+        <ul className="flex flex-col mt-1 space-y-4 px-4">
           <li>
             <Link
               href="/surahs"

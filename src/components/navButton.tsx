@@ -22,7 +22,7 @@ export default function NavButton({ isOpen, toggleMenu }: Props) {
       className={cn(
         "fixed top-2 right-0 flex flex-col z-50 items-center justify-center w-5 h-32 group bg-gray-400 rounded-l-md dark:border-gray-100 mt-5 p-2",
         {
-          "w-12 bg-transparent": isOpen,
+          "w-8 h-10 mr-2 p-0 mt-2 mb-0 bg-transparent": isOpen,
         }
       )}
       onClick={toggleMenu}

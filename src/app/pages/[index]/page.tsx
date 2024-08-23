@@ -1,6 +1,5 @@
 "use client";
 
-import surahdata from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json";
 import { useSearchParams } from "next/navigation";
 import MushafPage from "@/components/mushafPage";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -11,7 +10,6 @@ export default function Page({ params }: { params: { index: string } }) {
   const router = useRouter();
   const { index } = params;
   const searchParams = useSearchParams();
-  const number = searchParams.get("number");
 
   // Pages navigation limitation
   if (Number(index) < 1) {
@@ -34,11 +32,6 @@ export default function Page({ params }: { params: { index: string } }) {
 
   return (
     <div className="flex flex-col justify-center items-center m-5">
-      {number && (
-        <h2 className="text-2xl text-center">
-          {surahdata[Number(number) - 1].name}
-        </h2>
-      )}
       <MushafPage index={index} />
     </div>
   );
