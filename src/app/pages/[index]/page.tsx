@@ -42,11 +42,13 @@ export default function Page({ params }: { params: { index: string } }) {
     <Suspense
       fallback={
         <div className="flex flex-col justify-center items-center m-5">
-          <div className="animate-pulse h-96 w-full bg-gray-300 rounded-lg"></div>
+          <div className="animate-pulse h-28 w-12 bg-gray-300 rounded-lg"></div>
         </div>
       }
     >
-      <MushafPage index={index} />
+      <div className="flex flex-col justify-center items-center m-5">
+        <MushafPage index={index} />
+      </div>
     </Suspense>
   );
 }
