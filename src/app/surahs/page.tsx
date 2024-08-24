@@ -15,7 +15,7 @@ export async function generateMetadata() {
     openGraph,
   };
 }
-export default function Surahs() {
+export default function Page() {
   return (
     <div className="container m-2">
       <SurahList />

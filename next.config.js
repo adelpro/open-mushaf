@@ -119,7 +119,6 @@ const runtimeCaching = [
 ];
 const pwaConfig = {
   dest: "public",
-  sw: "service-worker.js",
   disable: process.env.NODE_ENV !== "production",
   register: true,
   skipWaiting: true,

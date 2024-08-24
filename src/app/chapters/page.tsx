@@ -14,7 +14,7 @@ export async function generateMetadata() {
     openGraph,
   };
 }
-export default function Chapters() {
+export default function Page() {
   return (
     <div className="container m-2">
       <ChapterList />
