@@ -1,15 +1,23 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import MushafPage from "@/components/mushafPage";
-import { useHotkeys } from "react-hotkeys-hook";
 import { useRouter } from "next/navigation";
 import { defaultNumberOfPages } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
+import { useHotkeys } from "react-hotkeys-hook";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const MushafPage = dynamic(() => import("@/components/mushafPage"), {
+  suspense: true,
+  loading: () => (
+    <div className="flex flex-col justify-center items-center m-5">
+      <div className="animate-pulse h-96 w-full bg-gray-300 rounded-lg"></div>
+    </div>
+  ),
+});
 
 export default function Page({ params }: { params: { index: string } }) {
   const router = useRouter();
   const { index } = params;
-  const searchParams = useSearchParams();
 
   // Pages navigation limitation
   if (Number(index) < 1) {
@@ -31,8 +39,14 @@ export default function Page({ params }: { params: { index: string } }) {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center m-5">
+    <Suspense
+      fallback={
+        <div className="flex flex-col justify-center items-center m-5">
+          <div className="animate-pulse h-96 w-full bg-gray-300 rounded-lg"></div>
+        </div>
+      }
+    >
       <MushafPage index={index} />
-    </div>
+    </Suspense>
   );
 }
