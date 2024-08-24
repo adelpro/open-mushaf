@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import NavButton from "./navButton";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import useDownloadassetsOffLine from "@/hooks/useDownloadassetsOffLine";
 
 export default function NavMenu() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { downloadAssets } = useDownloadassetsOffLine();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -76,6 +77,17 @@ export default function NavMenu() {
               onClick={() => setIsOpen(false)}
             >
               إتصل بنا
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/download-offline"
+              className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              تنزيل المعطيات
             </Link>
           </li>
         </ul>
