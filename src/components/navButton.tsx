@@ -6,23 +6,22 @@ type Props = {
   toggleMenu: () => void;
 };
 const genericHamburgerLine =
-  "h-1 my-1 rounded-full bg-black transition ease transform duration-300 opacity-50 group-hover:opacity-100 w-full dark:bg-gray-100";
+  "h-1 w-1 my-1 rounded-full bg-black transition ease transform duration-300 opacity-50 group-hover:opacity-100 w-full dark:bg-gray-100";
 
 export default function NavButton({ isOpen, toggleMenu }: Props) {
   return (
     <button
       aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-      aria-controls="menuNav"
+      aria-controls="nav"
       aria-expanded={isOpen}
       title={isOpen ? "Close navigation menu" : "Open navigation menu"}
       role="button"
       aria-haspopup="true"
       type="button"
-      id="openIcon"
       className={cn(
-        "fixed top-2 right-0 flex flex-col z-50 items-center justify-center w-5 h-32 group bg-gray-400 rounded-l-md dark:border-gray-100 mt-5 p-2",
+        "fixed top-2 right-0 flex flex-col z-50 items-center justify-center w-5 h-20 group bg-gray-200 border border-gray-600 rounded-l-xl dark:border-gray-100 mt-5 p-2",
         {
-          "w-8 h-10 mr-2 p-0 mt-2 mb-0 bg-transparent": isOpen,
+          "w-8 h-10 mr-2 p-0 bg-transparent border-0": isOpen,
         }
       )}
       onClick={toggleMenu}

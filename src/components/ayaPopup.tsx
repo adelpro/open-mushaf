@@ -8,6 +8,7 @@ import tafseerTabary from "@/data/tafaseer/tabary.json";
 import tafseerSaady from "@/data/tafaseer/saady.json";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/utils/cn";
 
 type Props = {
   show: boolean;
@@ -85,6 +86,7 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
       }}
     />
   );
+
   const startResize = () => {
     setIsResizing(true);
   };
@@ -94,44 +96,60 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   };
 
   useEffect(() => {
-    const handleResize = (e: MouseEvent) => {
+    const handleMouseResize = (e: MouseEvent) => {
       if (isResizing && popupRef.current) {
         const newHeight = window.innerHeight - e.clientY;
         setPopupHeight(newHeight);
       }
     };
-    document.addEventListener("mousemove", handleResize);
+
+    const handleTouchResize = (e: TouchEvent) => {
+      if (isResizing && popupRef.current) {
+        const touch = e.touches[0];
+        const newHeight = window.innerHeight - touch.clientY;
+        setPopupHeight(newHeight);
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseResize);
     document.addEventListener("mouseup", stopResize);
+    document.addEventListener("touchmove", handleTouchResize);
+    document.addEventListener("touchend", stopResize);
+
     return () => {
-      document.removeEventListener("mousemove", handleResize);
+      document.removeEventListener("mousemove", handleMouseResize);
       document.removeEventListener("mouseup", stopResize);
+      document.removeEventListener("touchmove", handleTouchResize);
+      document.removeEventListener("touchend", stopResize);
     };
   }, [isResizing, setPopupHeight]);
 
   return (
-    <div
-      className={`fixed inset-0 z-50 flex justify-center items-end transition-opacity duration-500 ease-in-out ${
-        show ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
-    >
+    <div className="fixed inset-0 z-50 flex justify-center items-end">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-gray-800 opacity-50"
+        className={cn(
+          "absolute inset-0 bg-gray-800 transition-opacity duration-300",
+          show ? "opacity-50" : "opacity-0"
+        )}
         onClick={() => setShow(false)}
       />
 
       {/* Popup */}
       <div
         ref={popupRef}
-        className={`relative bg-white shadow-lg transform transition-transform duration-500 ease-in-out rounded-t-lg w-full max-w-md overflow-hidden ${
-          show ? "translate-y-0" : "translate-y-full"
-        }`}
-        style={{ height: popupHeight }}
+        className={cn(
+          "bg-white shadow-lg rounded-t-lg w-full max-w-md overflow-hidden transform transition-transform duration-300",
+          show ? "translate-y-0" : "translate-y-full",
+          isResizing ? "opacity-90" : "opacity-100"
+        )}
+        style={{ height: `${popupHeight}px` }}
       >
         {/* Resize Button */}
         <button
           className=" w-full flex flex-col justify-center items-center cursor-s-resize p-1"
           onMouseDown={startResize}
+          onTouchStart={startResize}
           aria-label="Resize"
         >
           <span className="max-w-md w-20 h-[1px] rounded-md mt-1 mb-[1px] bg-gray-500"></span>

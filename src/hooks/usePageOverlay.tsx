@@ -77,7 +77,7 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           backgroundColor: `${
             show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
               ? "rgba(128, 128, 128, 0.5)"
-              : "rgba(150, 150, 150, 0.2)"
+              : "transparent"
           }`,
         }}
         onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
@@ -103,7 +103,7 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
               selectedAya.aya === aya[1] + 1 &&
               selectedAya.sura === aya[0]
                 ? "rgba(128, 128, 128, 0.5)"
-                : "rgba(128, 128, 128, 0.2)"
+                : "transparent"
             }`,
           }}
         ></div>
@@ -130,7 +130,7 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
             backgroundColor: `${
               show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
                 ? "rgba(128, 128, 128, 0.5)"
-                : "rgba(128, 128, 128, 0.2)"
+                : "transparent"
             }`,
           }}
         ></div>

@@ -48,7 +48,7 @@ export default function MushafPage({ index }: Props) {
   }, []);
   return (
     <div
-      className="relative flex flex-col justify-center items-center w-full max-w-[500px] min-h-96 inset-0"
+      className="relative flex flex-col justify-center items-center w-full max-w-md inset-0"
       {...swipeHandlers}
     >
       <div className="w-full items-center justify-center">
@@ -69,7 +69,6 @@ export default function MushafPage({ index }: Props) {
         />
       </div>
       <span className="text-gray-500 ">الصفحة {index}</span>
-      <div className="items-center justify-center">{...overlay}</div>
       {show ? (
         <AyaPopup
           aya={selectedAya.aya}
@@ -77,7 +76,10 @@ export default function MushafPage({ index }: Props) {
           show={show}
           setShow={setShow}
         />
-      ) : null}
+      ) : (
+        <></>
+      )}
+      <div className="items-center justify-center">{...overlay}</div>
     </div>
   );
 }

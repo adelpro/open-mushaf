@@ -20,14 +20,26 @@ export default function NavMenu() {
         })}
         onClick={() => setIsOpen(false)}
       />
+
       <nav
         className={cn(
           "fixed top-0 right-0 h-full rounded-l-xl w-64 bg-gray-800 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-30 pt-16 mt-2",
           { "translate-x-0": isOpen }
         )}
         aria-hidden={!isOpen}
+        id="nav"
+        role="navigation"
       >
         <ul className="flex flex-col mt-1 space-y-4 px-4">
+          <li>
+            <Link
+              href="/"
+              className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
+              onClick={() => setIsOpen(false)}
+            >
+              المصحف
+            </Link>
+          </li>
           <li>
             <Link
               href="/surahs"
