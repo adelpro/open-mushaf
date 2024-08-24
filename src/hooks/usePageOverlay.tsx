@@ -5,6 +5,9 @@ import {
   defaultMarginY,
   defaultPageHeight,
   defaultPageWidth,
+  defaultFirstPagesWidth,
+  defaultFirstPAgesMarginX,
+  defaultFirstPagesMarginY,
 } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
 import { Aya, Page } from "@/types";
 import { getDimensionCoeff } from "@/utils/getDimensionCoeff";
@@ -37,11 +40,28 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
   });
 
   // correct dimensions
-  const marginX = defaultMarginX * heightCoeff;
+  let marginX = defaultMarginX * heightCoeff;
+
+  // correct dimensions for 1/2 pages
+  if (index <= 2) {
+    marginX = defaultFirstPAgesMarginX * heightCoeff;
+  }
+
   const lineHeight = defaultLineHeight * heightCoeff;
 
-  const pageWidth = defaultPageWidth * widthCoeff;
-  const marginY = defaultMarginY * widthCoeff;
+  let pageWidth = defaultPageWidth * widthCoeff;
+
+  // correct dimensions for 1/2 pages
+  if (index <= 2) {
+    pageWidth = defaultFirstPagesWidth * widthCoeff;
+  }
+
+  let marginY = defaultMarginY * widthCoeff;
+
+  // correct dimensions for 1/2 pages
+  if (index <= 2) {
+    marginY = defaultFirstPagesMarginY * widthCoeff;
+  }
 
   //
 
@@ -56,10 +76,16 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
   };
   page.map((aya: Aya) => {
     const defaultX: number = aya[2];
+
     const defaultY: number = aya[3];
 
     // Dimensions correction
-    const X = defaultX * heightCoeff;
+    let X = defaultX * heightCoeff;
+    // Correction for first and secod pages only
+    if (index <= 2) {
+      X = X - 100;
+      console.log("X", X);
+    }
     const Y = defaultY * widthCoeff;
 
     // Drawing overlay for aya line (first part before the aya marker)
@@ -73,7 +99,7 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           left: `${Y - marginY}px`,
           width: `${pageWidth + marginY - Y}px`,
           height: `${lineHeight}px`,
-          //border: "1px solid red",
+          border: "1px solid red",
           backgroundColor: `${
             show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
               ? "rgba(128, 128, 128, 0.5)"

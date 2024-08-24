@@ -7,6 +7,10 @@ const defaultMarginY = 20;
 const defaultLineHeight = 40;
 const defaultNumberOfPages = 604;
 
+const defaultFirstPagesWidth = 320;
+const defaultFirstPAgesMarginX = 20;
+const defaultFirstPagesMarginY = 20;
+
 export {
   defaultPageHeight,
   defaultMarginX,
@@ -14,4 +18,7 @@ export {
   defaultMarginY,
   defaultLineHeight,
   defaultNumberOfPages,
+  defaultFirstPagesWidth,
+  defaultFirstPAgesMarginX,
+  defaultFirstPagesMarginY,
 };
