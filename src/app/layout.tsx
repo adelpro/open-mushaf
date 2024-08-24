@@ -10,13 +10,18 @@ export const metadata: Metadata = {
   description: "موقع لعرض اللمصحف الكريم برواية ورش عن طريق الأزرق",
 };
 
+export const viewport = {
+  width: 1,
+  themeColor: "dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir={`${rtl ? "rtl" : "ltr"}`}>
+    <html dir={`${rtl ? "rtl" : "ltr"}`}>
       <body className={amiri.className}>
         <NavMenu />
         {children}

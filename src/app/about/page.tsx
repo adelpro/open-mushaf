@@ -1,6 +1,19 @@
 import Link from "next/link";
 import React from "react";
+export async function generateMetadata() {
+  const title = "Open-Mushaf - About";
+  const description = "حول الموقع";
+  const openGraph = {
+    title,
+    description,
+  };
 
+  return {
+    title,
+    description,
+    openGraph,
+  };
+}
 export default function page() {
   return (
     <div className="flex flex-col items-center justify-center h-screen p-8 bg-white text-gray-900">

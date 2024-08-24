@@ -1,22 +1,21 @@
-"use client";
-import SurahList from "../components/surahList";
-import useLocalStorage from "@/hooks/useLocalStorage";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import Home from "./home";
 
-export default function Home() {
-  const router = useRouter();
-  const [selectedPage, _] = useLocalStorage<Number>("selectedPage", 1);
-  useEffect(() => {
-    if (selectedPage) {
-      router.push(`/pages/${selectedPage}`);
-    }
-  }, [selectedPage, router]);
-  return selectedPage ? (
-    <></>
-  ) : (
-    <main className="min-h-screen p-5 sm:p-10 md:p-24">
-      <SurahList />
-    </main>
-  );
+export const metadata = generateMetadata();
+
+function generateMetadata() {
+  const title = "Open-Mushaf";
+  const description = "المحف المفتوح المصدر";
+  const openGraph = {
+    title,
+    description,
+  };
+
+  return {
+    title,
+    description,
+    openGraph,
+  };
+}
+export default function Page() {
+  <Home />;
 }

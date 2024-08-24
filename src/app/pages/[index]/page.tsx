@@ -6,6 +6,20 @@ import { useHotkeys } from "react-hotkeys-hook";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
+export async function generateMetadata() {
+  const title = "Open-Mushaf - Pages";
+  const description = "صفحات المصحف";
+  const openGraph = {
+    title,
+    description,
+  };
+
+  return {
+    title,
+    description,
+    openGraph,
+  };
+}
 const MushafPage = dynamic(() => import("@/components/mushafPage"), {
   suspense: true,
   loading: () => (
