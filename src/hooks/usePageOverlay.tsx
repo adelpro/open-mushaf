@@ -81,10 +81,10 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
 
     // Dimensions correction
     let X = defaultX * heightCoeff;
-    // Correction for first and secod pages only
+
+    // Correction for 1/2 pages only
     if (index <= 2) {
-      X = X - 100;
-      console.log("X", X);
+      X = (defaultX - 100) * heightCoeff;
     }
     const Y = defaultY * widthCoeff;
 
@@ -99,7 +99,7 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           left: `${Y - marginY}px`,
           width: `${pageWidth + marginY - Y}px`,
           height: `${lineHeight}px`,
-          border: "1px solid red",
+          // border: "1px solid red",
           backgroundColor: `${
             show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
               ? "rgba(128, 128, 128, 0.5)"
