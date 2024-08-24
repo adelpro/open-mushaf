@@ -26,7 +26,7 @@ export default function NavButton({ isOpen, toggleMenu }: Props) {
       onClick={toggleMenu}
     >
       <span className="sr-only">Toggle navigation menu</span>
-
+      <span className="hidden">navigation menu</span>
       <span
         className={cn(genericHamburgerLine, {
           "rotate-45 translate-y-3 bg-white max-w-8": isOpen,
