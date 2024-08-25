@@ -1,44 +1,31 @@
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import { defaultNumberOfPages } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
 const useDownloadassetsOffLine = () => {
   const [status, setStatus] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
-  const [total, setTotal] = useState(0);
-  useEffect(() => {
-    if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
-      navigator.serviceWorker.addEventListener("message", (event) => {
-        if (event.data && event.data.type === "DOWNLOAD_PROGRESS") {
-          setProgress(event.data.progress);
-          setTotal(event.data.total);
-          setStatus(
-            `Downloading images (${event.data.progress}/${event.data.total})...`
-          );
-          console.log(
-            `Downloading images (${event.data.progress}/${event.data.total})...`
-          );
-        }
+  const total = defaultNumberOfPages;
 
-        if (event.data && event.data.type === "DOWNLOAD_COMPLETE") {
-          setStatus("Images downloaded successfully!");
-          setProgress(event.data.total);
-          console.log("Images downloaded successfully!");
-        }
-      });
-    }
-  }, []);
+  const downloadAssets = async () => {
+    setStatus("بدء التحميل...");
+    // fetch all images in public/mushaf/mushaf-elmadina-warsh-azrak from 1.png to 604.png the the baground
+    const cache = await caches.open("mushaf-elmadina-warsh-azrak-cache");
+    let progress = 0;
 
-  const downloadAssets = () => {
-    setStatus("Starting download...");
-    console.log("Starting download...");
-    if (
-      window !== undefined &&
-      "serviceWorker" in navigator &&
-      navigator.serviceWorker.controller
-    ) {
-      navigator.serviceWorker.controller.postMessage({
-        type: "DOWNLOAD_OFFLINE",
-      });
+    for (let i = 1; i <= total; i++) {
+      const url = `/mushaf/mushaf-elmadina-warsh-azrak/${i}.png`;
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          await cache.put(url, response);
+          progress++;
+          setProgress(progress);
+          setStatus(`تحميل الصورة (${progress}/${total})...`);
+        } else {
+          console.error(`فشل في تحميل ${url}: ${response.statusText}`);
+        }
+      } catch {}
     }
+    setStatus("تم التحميل بنجاح");
   };
   return {
     downloadAssets,

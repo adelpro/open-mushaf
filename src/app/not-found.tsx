@@ -13,7 +13,7 @@ export default function NotFoundPage() {
         <div className="mt-6">
           <Link
             href="/"
-            className="w-full max-w-md transition duration-300 ease-in-out mc-4 my-2 px-4 py-2 font-medium rounded bg-slate-400 hover:opacity-90"
+            className="w-full max-w-md transition duration-300 ease-in-out mc-4 my-2 px-4 py-2 font-medium rounded bg-blue-600 hover:opacity-90 text-white"
           >
             العودة للصفحة الرئيسية
           </Link>

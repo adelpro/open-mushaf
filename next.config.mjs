@@ -50,6 +50,22 @@ const config = {
 };
 // Runtime Caching rules
 const runtimeCaching = [
+  //Cache Mushaf images
+  {
+    urlPattern: "/mushaf/mushaf-elmadina-warsh-azrak/**",
+    handler: "CacheFirst",
+    options: {
+      cacheName: "mushaf-images",
+      expiration: {
+        maxEntries: 604,
+        maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+        purgeOnQuotaError: false, // Prevent automatic purge
+      },
+      cacheableResponse: {
+        statuses: [0, 200],
+      },
+    },
+  },
   // https request caching
   {
     urlPattern: /^https?.*/,
@@ -127,6 +143,7 @@ const pwaConfig = {
   // for more information: https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
   // Must be false to precache the home page url ('/')
   dynamicStartUrl: false,
+  //buildExcludes: [/middleware-manifest.json$/],
   cacheStartUrl: true,
   cacheOnFrontEndNav: true,
   runtimeCaching,

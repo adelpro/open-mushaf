@@ -16,5 +16,9 @@ export async function generateMetadata() {
   };
 }
 export default function Page() {
-  return <DownloadOffline />;
+  return (
+    <div className="container p-2">
+      <DownloadOffline />
+    </div>
+  );
 }
