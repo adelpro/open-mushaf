@@ -13,11 +13,15 @@ const useDownloadassetsOffLine = () => {
           setStatus(
             `Downloading images (${event.data.progress}/${event.data.total})...`
           );
+          console.log(
+            `Downloading images (${event.data.progress}/${event.data.total})...`
+          );
         }
 
         if (event.data && event.data.type === "DOWNLOAD_COMPLETE") {
           setStatus("Images downloaded successfully!");
           setProgress(event.data.total);
+          console.log("Images downloaded successfully!");
         }
       });
     }
@@ -25,6 +29,7 @@ const useDownloadassetsOffLine = () => {
 
   const downloadAssets = () => {
     setStatus("Starting download...");
+    console.log("Starting download...");
     if (
       window !== undefined &&
       "serviceWorker" in navigator &&
