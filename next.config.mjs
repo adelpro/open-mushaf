@@ -41,11 +41,11 @@ const config = {
   },
   typescript: {
     // Set this to false if you want production builds to abort if there's type errors
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: process.env.NODE_ENV !== "production",
   },
   eslint: {
     // Set this to false if you want production builds to abort if there's lint errors
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: process.env.NODE_ENV !== "production",
   },
 };
 // Runtime Caching rules
@@ -73,7 +73,7 @@ const runtimeCaching = [
     options: {
       cacheName: "static-image-assets",
       expiration: {
-        maxEntries: 50,
+        maxEntries: 700,
         maxAgeSeconds: 60 * 60 * 24 * 30,
         // 30 days.
         purgeOnQuotaError: true,

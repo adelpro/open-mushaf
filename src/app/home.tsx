@@ -10,15 +10,19 @@ export default function Home() {
   const [showSurahList, setShowSurahList] = useState(false);
 
   useEffect(() => {
-    if (index !== "1") {
+    console.log("index:", index, typeof index, index === "1");
+
+    if (index === "1") {
       setShowSurahList(true);
-      setTimeout(() => {
-        router.replace(`/mushaf/${index}`);
-      }, 100);
+      return;
     }
+
+    router.replace(`/mushaf/${index}`);
   }, [index]);
 
   return (
-    <main className="container m-2">{showSurahList && <SurahList />}</main>
+    <main className="container m-2">
+      {showSurahList ? <SurahList /> : <></>}
+    </main>
   );
 }
