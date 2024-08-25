@@ -17,5 +17,5 @@ function generateMetadata() {
   };
 }
 export default function Page() {
-  <Home />;
+  <span>xxxxxxxxxxxxxxx.........0000000</span>;
 }

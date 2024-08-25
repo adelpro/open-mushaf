@@ -12,7 +12,7 @@ import useSwipe from "@/hooks/useSwipe";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  index: string;
+  index: number;
 };
 
 export default function MushafPage({ index }: Props) {
