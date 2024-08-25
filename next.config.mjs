@@ -127,8 +127,12 @@ const pwaConfig = {
   // for more information: https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
   // Must be false to precache the home page url ('/')
   dynamicStartUrl: false,
+
   cacheStartUrl: true,
   runtimeCaching,
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  extendDefaultRuntimeCaching: true,
 };
 
 /* How this will work
