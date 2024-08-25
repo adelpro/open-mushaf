@@ -1,14 +1,24 @@
 "use client";
-import MushafPage from "@/components/mushafPage";
-import SurahList from "../components/surahList";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import SurahList from "@/components/surahList";
 
 export default function Home() {
-  //const [selectedPage, _] = useLocalStorage<number>("selectedPage", 1);
-  // console.log({ selectedPage });
+  const [index, _] = useLocalStorage<string>("index", "1");
+  const router = useRouter();
+  const [showSurahList, setShowSurahList] = useState(false);
+
+  useEffect(() => {
+    if (index !== "1") {
+      setShowSurahList(true);
+      setTimeout(() => {
+        router.replace(`/mushaf/${index}`);
+      }, 100);
+    }
+  }, [index]);
+
   return (
-    <main className="container m-2">
-      <span>xxxxxxxxxxxxxxxxxxxxxxx</span>
-    </main>
+    <main className="container m-2">{showSurahList && <SurahList />}</main>
   );
 }

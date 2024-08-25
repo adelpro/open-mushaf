@@ -3,11 +3,9 @@ import React, { useState } from "react";
 import NavButton from "./navButton";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
-import useDownloadassetsOffLine from "@/hooks/useDownloadassetsOffLine";
-
 export default function NavMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const { downloadAssets } = useDownloadassetsOffLine();
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -36,7 +34,7 @@ export default function NavMenu() {
         <ul className="flex flex-col mt-1 space-y-4 px-4">
           <li>
             <Link
-              href="/"
+              href="/mushaf"
               className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
               onClick={() => setIsOpen(false)}
             >

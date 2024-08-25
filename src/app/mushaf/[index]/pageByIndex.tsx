@@ -5,14 +5,11 @@ import { defaultNumberOfPages } from "@/data/quran-metadata/mushaf-elmadina-wars
 import { useHotkeys } from "react-hotkeys-hook";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import Skeleton from "@/components/skeleton";
 
 const MushafPage = dynamic(() => import("@/components/mushafPage"), {
   suspense: true,
-  loading: () => (
-    <div className="flex flex-col justify-center items-center m-5">
-      <div className="animate-pulse h-96 w-full bg-gray-300 rounded-lg"></div>
-    </div>
-  ),
+  loading: () => <Skeleton />,
 });
 
 export default function PageByIndex({ params }: { params: { index: string } }) {
@@ -21,21 +18,21 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
 
   // Pages navigation limitation
   if (Number(index) < 1) {
-    router.push("/pages/1");
+    router.push("/mushaf/1");
   }
 
   if (Number(index) > defaultNumberOfPages) {
-    router.push(`/pages/${defaultNumberOfPages}`);
+    router.push(`/mushaf/${defaultNumberOfPages}`);
   }
   //
 
   useHotkeys("ArrowLeft", () => {
     if (Number(index) >= defaultNumberOfPages) return;
-    router.push(`/pages/${Number(index) + 1}`);
+    router.push(`/mushaf/${Number(index) + 1}`);
   });
   useHotkeys("ArrowRight", () => {
     if (Number(index) <= 1) return;
-    router.push(`/pages/${Number(index) - 1}`);
+    router.push(`/mushaf/${Number(index) - 1}`);
   });
 
   return (
@@ -47,7 +44,7 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
       }
     >
       <div className="flex flex-col justify-center items-center m-5">
-        <MushafPage index={index} />
+        <MushafPage index={Number(index)} />
       </div>
     </Suspense>
   );

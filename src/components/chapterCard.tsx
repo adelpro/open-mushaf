@@ -10,7 +10,7 @@ export default function ChapterCard({ chapter }: Props) {
   return (
     <Link
       className="flex flex-col p-1 pr-4 text-slate-600 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer w-full sm:max-w-md"
-      href={`/pages/${chapter.startingPage}?number=${chapter.number}`}
+      href={`/mushaf/${chapter.startingPage}?number=${chapter.number}`}
     >
       <div
         className="flex gap-5 bg-contain bg-no-repeat rounded-lg"

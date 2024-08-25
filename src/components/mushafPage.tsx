@@ -18,8 +18,8 @@ type Props = {
 export default function MushafPage({ index }: Props) {
   const router = useRouter();
   const swipeHandlers = useSwipe({
-    onSwipedLeft: () => router.push(`/pages/${Number(index) - 1}`),
-    onSwipedRight: () => router.push(`/pages/${Number(index) + 1}`),
+    onSwipedLeft: () => router.push(`/mushaf/${Number(index) - 1}`),
+    onSwipedRight: () => router.push(`/mushaf/${Number(index) + 1}`),
   });
   const pageImageRef = useRef<HTMLImageElement>(null);
   const [mushafPage, setMushafPage] = useState<{
@@ -27,7 +27,7 @@ export default function MushafPage({ index }: Props) {
     height: number;
   }>({ width: defaultPageWidth, height: defaultPageHeight });
 
-  const [_, setSelectedPage] = useLocalStorage<Number>("selectedPage", 1);
+  const [_, setIndex] = useLocalStorage<Number>("index", 1);
 
   //TODO add custom width and height from mushafPage state
 
@@ -60,7 +60,7 @@ export default function MushafPage({ index }: Props) {
           height={defaultPageHeight}
           className="w-full h-full object-cover"
           onLoad={() => {
-            setSelectedPage(Number(index));
+            setIndex(Number(index));
           }}
           priority
           quality={100}
