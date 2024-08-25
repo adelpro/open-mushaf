@@ -6,7 +6,7 @@ An open source implementation of the Quran mushaf in [typescript](https://www.ty
 
 ## Ressources
 
-- All mushaf pages are from [the Quran complex of king Fahd](https://qurancomplex.gov.sa/techquran/dev/).
+- All mushaf pages are from [the Quran complex of king Fehd](https://qurancomplex.gov.sa/techquran/dev/).
 - Data base (json) is from [Mushaf-muri](https://github.com/Zizwar/mushaf-mauri).
 - tafaseer data is from [Ayat](https://quran.ksu.edu.sa/ayat).
 
