@@ -9,7 +9,7 @@ export default function DownloadOffline() {
   const percentage = total > 0 ? (progress / total) * 100 : 0;
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen w-full max-w-md mx-5 p-2">
       <div className="w-full m-10 border border-black flex flex-col items-center">
         {status && <p>{status}</p>}
         {total > 0 && (
@@ -56,7 +56,7 @@ export default function DownloadOffline() {
           </div>
         )}
       </div>
-      <button onClick={downloadAssets} className="mt-4">
+      <button onClick={downloadAssets} className="mt-4 p-2 w-full max-w-md">
         Download offline data
       </button>
     </div>

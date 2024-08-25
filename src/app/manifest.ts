@@ -73,23 +73,13 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png",
       },
       {
-        src: "/screenshots/juz-index-desktop.png",
-        sizes: "1256x916",
-        type: "image/png",
-      },
-      {
-        src: "/screenshots/juz-index-mobile.png",
-        sizes: "424x916",
-        type: "image/png",
-      },
-      {
         src: "/screenshots/sura-index-desktop.png",
-        sizes: "1236x916",
+        sizes: "1239x916",
         type: "image/png",
       },
       {
         src: "/screenshots/sura-index-mobile.png",
-        sizes: "513x916",
+        sizes: "531x916",
         type: "image/png",
       },
     ],

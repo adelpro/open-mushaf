@@ -119,20 +119,17 @@ const runtimeCaching = [
 ];
 const pwaConfig = {
   dest: "public",
-  swSrc: "src/utils/service-worker.ts",
   disable: process.env.NODE_ENV !== "production",
   register: true,
   skipWaiting: true,
   clientsClaim: true,
+
   // for more information: https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
   // Must be false to precache the home page url ('/')
   dynamicStartUrl: false,
-
   cacheStartUrl: true,
-  runtimeCaching,
   cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
-  extendDefaultRuntimeCaching: true,
+  runtimeCaching,
 };
 
 /* How this will work
