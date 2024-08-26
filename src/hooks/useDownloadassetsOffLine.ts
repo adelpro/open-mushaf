@@ -47,7 +47,7 @@ const useDownloadassetsOffLine = () => {
         if (response.ok) {
           await cache.put(url, response)
           progressCount++
-          setProgress(progress)
+          setProgress(progressCount)
           setStatus(`تحميل الصورة (${progress}/${total})...`)
         } else {
           console.error(`فشل في تحميل ${url}: ${response.statusText}`)
