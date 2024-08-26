@@ -1,5 +1,5 @@
-export * from "./surah";
+export * from './surah'
 
-export * from "./chapter";
+export * from './chapter'
 
-export * from "./aya";
+export * from './aya'

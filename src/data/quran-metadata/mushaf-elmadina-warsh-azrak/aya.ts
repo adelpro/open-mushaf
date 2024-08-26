@@ -1,4 +1,4 @@
-import { Aya, Page } from "@/types";
+import { Aya, Page } from '@/types'
 
 // [sura, aya, x, y]
 export const coordinateElMadinaWarshAzrak: Page[] = [
@@ -7445,4 +7445,4 @@ export const coordinateElMadinaWarshAzrak: Page[] = [
     [114, 5, 579, 120],
     [114, 6, 616, 149],
   ],
-];
+]

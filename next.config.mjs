@@ -1,5 +1,5 @@
-import withBundleAnalyzer from "@next/bundle-analyzer";
-import withPWA from "next-pwa";
+import withBundleAnalyzer from '@next/bundle-analyzer'
+import withPWA from 'next-pwa'
 
 /** @type {import('next').NextConfig} */
 
@@ -8,54 +8,54 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "127.0.0.1",
-        port: "3540",
-        pathname: "/**",
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '3540',
+        pathname: '/**',
       },
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3540",
-        pathname: "/**",
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3540',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "images.pexels.com",
-        port: "",
-        pathname: "/photos/**",
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/photos/**',
       },
       {
-        protocol: "https",
-        hostname: "pixabay.com",
-        port: "",
-        pathname: "/get/**",
+        protocol: 'https',
+        hostname: 'pixabay.com',
+        port: '',
+        pathname: '/get/**',
       },
       {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
   typescript: {
     // Set this to false if you want production builds to abort if there's type errors
-    ignoreBuildErrors: process.env.NODE_ENV !== "production",
+    ignoreBuildErrors: process.env.NODE_ENV !== 'production',
   },
   eslint: {
     // Set this to false if you want production builds to abort if there's lint errors
-    ignoreDuringBuilds: process.env.NODE_ENV !== "production",
+    ignoreDuringBuilds: process.env.NODE_ENV !== 'production',
   },
-};
+}
 // Runtime Caching rules
 const runtimeCaching = [
   //Cache Mushaf images
   {
-    urlPattern: "/mushaf/mushaf-elmadina-warsh-azrak/**",
-    handler: "CacheFirst",
+    urlPattern: '/mushaf/mushaf-elmadina-warsh-azrak/**',
+    handler: 'CacheFirst',
     options: {
-      cacheName: "mushaf-images",
+      cacheName: 'mushaf-images',
       expiration: {
         maxEntries: 604,
         maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
@@ -69,9 +69,9 @@ const runtimeCaching = [
   // https request caching
   {
     urlPattern: /^https?.*/,
-    handler: "NetworkFirst",
+    handler: 'NetworkFirst',
     options: {
-      cacheName: "https-calls",
+      cacheName: 'https-calls',
       expiration: {
         maxAgeSeconds: 60 * 60 * 24 * 7,
         // 7 days.
@@ -85,9 +85,9 @@ const runtimeCaching = [
   // Images caching
   {
     urlPattern: /\.(jpe?g|png|gif|webp)$/i,
-    handler: "CacheFirst",
+    handler: 'CacheFirst',
     options: {
-      cacheName: "static-image-assets",
+      cacheName: 'static-image-assets',
       expiration: {
         maxEntries: 700,
         maxAgeSeconds: 60 * 60 * 24 * 30,
@@ -102,9 +102,9 @@ const runtimeCaching = [
   // js,css caching
   {
     urlPattern: /\.(js|css)$/i,
-    handler: "CacheFirst",
+    handler: 'CacheFirst',
     options: {
-      cacheName: "static-assets",
+      cacheName: 'static-assets',
       expiration: {
         maxEntries: 200,
         maxAgeSeconds: 60 * 60 * 24 * 90,
@@ -119,9 +119,9 @@ const runtimeCaching = [
   // Google fonts caching
   {
     urlPattern: /^https?:\/\/fonts\.googleapis\.com\/.*/,
-    handler: "CacheFirst",
+    handler: 'CacheFirst',
     options: {
-      cacheName: "google-fonts",
+      cacheName: 'google-fonts',
       expiration: {
         maxAgeSeconds: 60 * 60 * 24 * 90,
         // 90 days
@@ -132,10 +132,10 @@ const runtimeCaching = [
       },
     },
   },
-];
+]
 const pwaConfig = {
-  dest: "public",
-  disable: process.env.NODE_ENV !== "production",
+  dest: 'public',
+  disable: process.env.NODE_ENV !== 'production',
   register: true,
   skipWaiting: true,
   clientsClaim: true,
@@ -147,7 +147,7 @@ const pwaConfig = {
   cacheStartUrl: true,
   cacheOnFrontEndNav: true,
   runtimeCaching,
-};
+}
 
 /* How this will work
 
@@ -159,5 +159,5 @@ const pwaConfig = {
 * running (yarn dev) will only pass the (config)
 */
 export default withBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-})(withPWA(pwaConfig)(config));
+  enabled: process.env.ANALYZE === 'true',
+})(withPWA(pwaConfig)(config))
