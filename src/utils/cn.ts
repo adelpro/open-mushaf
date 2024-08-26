@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
-import { ClassValue, clsx } from "clsx";
+import { twMerge } from 'tailwind-merge'
+import { ClassValue, clsx } from 'clsx'
 /**
  * Combines multiple class values into a single string.
  *
@@ -7,5 +7,5 @@ import { ClassValue, clsx } from "clsx";
  * @return {string} - The combined class values as a string.
  */
 export function cn(...inputs: ClassValue[]): string {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }

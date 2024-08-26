@@ -1,16 +1,16 @@
-"use client";
-import React, { useState } from "react";
-import NavButton from "./navButton";
-import Link from "next/link";
-import { cn } from "@/utils/cn";
-import useLocalStorage from "@/hooks/useLocalStorage";
+'use client'
+import React, { useState } from 'react'
+import NavButton from './navButton'
+import Link from 'next/link'
+import { cn } from '@/utils/cn'
+import useLocalStorage from '@/hooks/useLocalStorage'
 export default function NavMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [index, _] = useLocalStorage<string>("index", "1");
+  const [isOpen, setIsOpen] = useState(false)
+  const [index, _] = useLocalStorage<string>('index', '1')
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION;
+    setIsOpen(!isOpen)
+  }
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION
 
   return (
     <div>
@@ -20,17 +20,25 @@ export default function NavMenu() {
 
       {/* Overlay */}
       <div
-        className={cn("absolute hidden bg-gray-800 opacity-50 z-30", {
-          "block inset-0": isOpen,
+        className={cn('absolute hidden bg-gray-800 opacity-50 z-30', {
+          'block inset-0': isOpen,
         })}
         onClick={() => setIsOpen(false)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            setIsOpen(false)
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-hidden={!isOpen}
       />
 
       {/* Menu */}
       <nav
         className={cn(
-          "fixed top-0 right-0 h-full rounded-l-xl w-64 bg-gray-800 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-30 pt-16 mt-2",
-          { "translate-x-0": isOpen }
+          'fixed top-0 right-0 h-full rounded-l-xl w-64 bg-gray-800 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-30 pt-16 mt-2',
+          { 'translate-x-0': isOpen }
         )}
         aria-hidden={!isOpen}
         id="nav"
@@ -87,7 +95,7 @@ export default function NavMenu() {
               href="/download-offline"
               className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
               onClick={() => {
-                setIsOpen(false);
+                setIsOpen(false)
               }}
             >
               تنزيل المعطيات
@@ -99,5 +107,5 @@ export default function NavMenu() {
         </span>
       </nav>
     </div>
-  );
+  )
 }

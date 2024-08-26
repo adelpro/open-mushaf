@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function NotFoundPage() {
   return (
@@ -20,5 +20,5 @@ export default function NotFoundPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
-import { defaultNumberOfPages } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
-import { useHotkeys } from "react-hotkeys-hook";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import Skeleton from "@/components/skeleton";
+import { useRouter } from 'next/navigation'
+import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+import { useHotkeys } from 'react-hotkeys-hook'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+import Skeleton from '@/components/skeleton'
 
-const MushafPage = dynamic(() => import("@/components/mushafPage"), {
+const MushafPage = dynamic(() => import('@/components/mushafPage'), {
   suspense: true,
   loading: () => <Skeleton />,
-});
+})
 
 export default function PageByIndex({ params }: { params: { index: string } }) {
-  const router = useRouter();
-  const { index } = params;
+  const router = useRouter()
+  const { index } = params
 
   // Pages navigation limitation
   if (Number(index) < 1) {
-    router.push("/mushaf/1");
+    router.push('/mushaf/1')
   }
 
   if (Number(index) > defaultNumberOfPages) {
-    router.push(`/mushaf/${defaultNumberOfPages}`);
+    router.push(`/mushaf/${defaultNumberOfPages}`)
   }
   //
 
-  useHotkeys("ArrowLeft", () => {
-    if (Number(index) >= defaultNumberOfPages) return;
-    router.push(`/mushaf/${Number(index) + 1}`);
-  });
-  useHotkeys("ArrowRight", () => {
-    if (Number(index) <= 1) return;
-    router.push(`/mushaf/${Number(index) - 1}`);
-  });
+  useHotkeys('ArrowLeft', () => {
+    if (Number(index) >= defaultNumberOfPages) return
+    router.push(`/mushaf/${Number(index) + 1}`)
+  })
+  useHotkeys('ArrowRight', () => {
+    if (Number(index) <= 1) return
+    router.push(`/mushaf/${Number(index) - 1}`)
+  })
 
   return (
     <Suspense
@@ -47,5 +47,5 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
         <MushafPage index={Number(index)} />
       </div>
     </Suspense>
-  );
+  )
 }

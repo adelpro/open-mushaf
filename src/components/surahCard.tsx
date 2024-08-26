@@ -1,10 +1,10 @@
-import Link from "next/link";
-import React from "react";
-import backgroundSurahCardLeft from "@/asset/background-surah-list-left.png";
-import { Surah } from "@/types";
+import Link from 'next/link'
+import React from 'react'
+import backgroundSurahCardLeft from '@/asset/background-surah-list-left.png'
+import { Surah } from '@/types'
 type Props = {
-  surah: Surah;
-};
+  surah: Surah
+}
 
 export default function SurahCard({ surah }: Props) {
   return (
@@ -33,5 +33,5 @@ export default function SurahCard({ surah }: Props) {
         </div>
       </div>
     </Link>
-  );
+  )
 }

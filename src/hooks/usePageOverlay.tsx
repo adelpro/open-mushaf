@@ -1,4 +1,4 @@
-import { coordinateElMadinaWarshAzrak } from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/aya";
+import { coordinateElMadinaWarshAzrak } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/aya'
 import {
   defaultLineHeight,
   defaultMarginX,
@@ -8,85 +8,85 @@ import {
   defaultFirstPagesWidth,
   defaultFirstPAgesMarginX,
   defaultFirstPagesMarginY,
-} from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec";
-import { Aya, Page } from "@/types";
-import { getDimensionCoeff } from "@/utils/getDimensionCoeff";
+} from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+import { Aya, Page } from '@/types'
+import { getDimensionCoeff } from '@/utils/getDimensionCoeff'
 
-import { useState } from "react";
+import { useState } from 'react'
 
 type SelectedAya = {
-  aya: number;
-  sura: number;
-};
+  aya: number
+  sura: number
+}
 type Props = {
-  index: number;
-  dimensions: { customPageWidth: number; customPageHeight: number };
-};
+  index: number
+  dimensions: { customPageWidth: number; customPageHeight: number }
+}
 const usePageOverlay = ({ index, dimensions }: Props) => {
   const [selectedAya, setSelectedAya] = useState<SelectedAya>({
     aya: 0,
     sura: 0,
-  });
-  const [show, setShow] = useState<boolean>(false);
-  const { customPageHeight, customPageWidth } = dimensions;
+  })
+  const [show, setShow] = useState<boolean>(false)
+  const { customPageHeight, customPageWidth } = dimensions
 
   const heightCoeff = getDimensionCoeff({
     defaultDimension: defaultPageHeight,
     customDimension: customPageHeight,
-  });
+  })
   const widthCoeff = getDimensionCoeff({
     defaultDimension: defaultPageWidth,
     customDimension: customPageWidth,
-  });
+  })
 
   // correct dimensions
-  let marginX = defaultMarginX * heightCoeff;
+  let marginX = defaultMarginX * heightCoeff
 
   // correct dimensions for 1/2 pages
   if (index <= 2) {
-    marginX = defaultFirstPAgesMarginX * heightCoeff;
+    marginX = defaultFirstPAgesMarginX * heightCoeff
   }
 
-  const lineHeight = defaultLineHeight * heightCoeff;
+  const lineHeight = defaultLineHeight * heightCoeff
 
-  let pageWidth = defaultPageWidth * widthCoeff;
+  let pageWidth = defaultPageWidth * widthCoeff
 
   // correct dimensions for 1/2 pages
   if (index <= 2) {
-    pageWidth = defaultFirstPagesWidth * widthCoeff;
+    pageWidth = defaultFirstPagesWidth * widthCoeff
   }
 
-  let marginY = defaultMarginY * widthCoeff;
+  let marginY = defaultMarginY * widthCoeff
 
   // correct dimensions for 1/2 pages
   if (index <= 2) {
-    marginY = defaultFirstPagesMarginY * widthCoeff;
+    marginY = defaultFirstPagesMarginY * widthCoeff
   }
 
   //
 
-  let prevX = marginX;
+  let prevX = marginX
 
-  let overlay: JSX.Element[] = [];
+  let overlay: JSX.Element[] = []
 
-  const page: Page = coordinateElMadinaWarshAzrak[Number(index)];
+  const page: Page = coordinateElMadinaWarshAzrak[Number(index)]
   const ayaClick = ({ aya, sura }: { aya: number; sura: number }) => {
-    setSelectedAya({ aya, sura });
-    setShow(true);
-  };
+    setSelectedAya({ aya, sura })
+    setShow(true)
+  }
   page.map((aya: Aya) => {
-    const defaultX: number = aya[2];
+    const defaultX: number = aya[2]
 
-    const defaultY: number = aya[3];
+    const defaultY: number = aya[3]
 
     // Dimensions correction
-    let X = defaultX * heightCoeff;
+    let X = defaultX * heightCoeff
 
     // Correction for 1/2 pages only
     if (index <= 2) {
-      X = (defaultX - 100) * heightCoeff;
+      X = (defaultX - 100) * heightCoeff
     }
-    const Y = defaultY * widthCoeff;
+    const Y = defaultY * widthCoeff
 
     // Drawing overlay for aya line (first part before the aya marker)
     const div = (
@@ -102,14 +102,21 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           // border: "1px solid red",
           backgroundColor: `${
             show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
-              ? "rgba(128, 128, 128, 0.5)"
-              : "transparent"
+              ? 'rgba(128, 128, 128, 0.5)'
+              : 'transparent'
           }`,
         }}
         onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            ;() => ayaClick({ aya: aya[1], sura: aya[0] })
+          }
+        }}
+        role="button"
+        tabIndex={0}
       ></div>
-    );
-    overlay = [...overlay, div];
+    )
+    overlay = [...overlay, div]
     // Drawing overlay for aya line (last part after the aya marker in the same line)
     if (Y > 93) {
       const divNextAya = (
@@ -118,6 +125,13 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           data-sura={aya[0]}
           className={`absolute cursor-pointer`}
           onClick={() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              ;() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })
+            }
+          }}
+          role="button"
+          tabIndex={0}
           style={{
             top: `${X}px`,
             left: `${marginY}px`,
@@ -128,17 +142,17 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
               show &&
               selectedAya.aya === aya[1] + 1 &&
               selectedAya.sura === aya[0]
-                ? "rgba(128, 128, 128, 0.5)"
-                : "transparent"
+                ? 'rgba(128, 128, 128, 0.5)'
+                : 'transparent'
             }`,
           }}
         ></div>
-      );
-      overlay = [...overlay, divNextAya];
+      )
+      overlay = [...overlay, divNextAya]
     }
 
     // Drawing overlay for multiple-line aya
-    const numberOfLines: number = Math.ceil((X - prevX) / lineHeight);
+    const numberOfLines: number = Math.ceil((X - prevX) / lineHeight)
 
     if (numberOfLines > 1) {
       const fullDiv = (x: number) => (
@@ -146,6 +160,13 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           data-aya={aya[1]}
           data-sura={aya[0]}
           onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              ;() => ayaClick({ aya: aya[1], sura: aya[0] })
+            }
+          }}
+          role="button"
+          tabIndex={0}
           className={`absolute cursor-pointer`}
           style={{
             top: `${x}px`,
@@ -155,31 +176,31 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
             //border: "1px solid green",
             backgroundColor: `${
               show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
-                ? "rgba(128, 128, 128, 0.5)"
-                : "transparent"
+                ? 'rgba(128, 128, 128, 0.5)'
+                : 'transparent'
             }`,
           }}
         ></div>
-      );
-      let i = numberOfLines;
-      let x = X;
+      )
+      let i = numberOfLines
+      let x = X
 
       do {
-        i = i - 1;
-        x = x - lineHeight;
+        i = i - 1
+        x = x - lineHeight
 
         // skip the first line of the page ( margin )
         // skip the line befor the first aya (Containing the sura name)
         if (x >= 40 && selectedAya.aya !== 1) {
-          overlay = [...overlay, fullDiv(x)];
+          overlay = [...overlay, fullDiv(x)]
         }
-      } while (i > 1);
+      } while (i > 1)
     }
 
-    prevX = X;
-  });
+    prevX = X
+  })
 
-  return { overlay, show, setShow, selectedAya };
-};
+  return { overlay, show, setShow, selectedAya }
+}
 
-export default usePageOverlay;
+export default usePageOverlay

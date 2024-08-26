@@ -1,5 +1,5 @@
-import gears from "@/asset/gear.svg";
-import Image from "next/image";
+import gears from '@/asset/gear.svg'
+import Image from 'next/image'
 export default function Skeleton() {
   return (
     <div
@@ -8,5 +8,5 @@ export default function Skeleton() {
     >
       <Image src={gears} height={150} width={150} alt="loading" />
     </div>
-  );
+  )
 }

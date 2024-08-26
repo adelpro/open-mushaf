@@ -1,21 +1,21 @@
-import React from "react";
-import DownloadOffline from "./downloadOffline";
-import { isPWASupported } from "@/utils/isPWASupported";
-import Link from "next/link";
+import React from 'react'
+import DownloadOffline from './downloadOffline'
+import { isPWASupported } from '@/utils/isPWASupported'
+import Link from 'next/link'
 
 export async function generateMetadata() {
-  const title = "Open-Mushaf - Download Offline";
-  const description = "تنزيل المعطيات";
+  const title = 'Open-Mushaf - Download Offline'
+  const description = 'تنزيل المعطيات'
   const openGraph = {
     title,
     description,
-  };
+  }
 
   return {
     title,
     description,
     openGraph,
-  };
+  }
 }
 
 export default function Page() {
@@ -31,7 +31,7 @@ export default function Page() {
         </h2>
 
         <p className="mt-4 text-gray-600">
-          لاستخدام تطبيقنا دون اتصال بالإنترنت، يجب أن يدعم متصفحك تقنية{" "}
+          لاستخدام تطبيقنا دون اتصال بالإنترنت، يجب أن يدعم متصفحك تقنية{' '}
           <bdi>PWA</bdi> التي تتيح التشغيل دون اتصال وتجربة مستخدم سلسة.
         </p>
 
@@ -45,5 +45,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  );
+  )
 }

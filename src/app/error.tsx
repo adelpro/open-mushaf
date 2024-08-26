@@ -1,25 +1,25 @@
-"use client";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+'use client'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import React, { useState, useEffect } from 'react'
 
 type props = {
-  error: Error & { digest?: string };
-  reset: () => void;
-};
+  error: Error & { digest?: string }
+  reset: () => void
+}
 export default function Error({ error, reset }: props) {
-  const [errorMessage, setErrorMessage] = useState("");
-  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState('')
+  const router = useRouter()
   useEffect(() => {
     if (error) {
       // Extract a user-friendly message from the error object
-      const userMessage = error.message || "An unexpected error occurred.";
-      setErrorMessage(userMessage);
+      const userMessage = error.message || 'An unexpected error occurred.'
+      setErrorMessage(userMessage)
 
       // Log the error for debugging purposes
-      console.error(error);
+      console.error(error)
     }
-  }, [error]);
+  }, [error])
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4 mt-4 bg-gray-100">
@@ -30,7 +30,7 @@ export default function Error({ error, reset }: props) {
 
         <div className="mt-6 flex flex-col md:flex-row gap-2">
           <button
-            onClick={() => router.push("/")}
+            onClick={() => router.push('/')}
             className="w-full max-w-md transition duration-300 ease-in-out mx-4 my-2 px-4 py-2 font-medium rounded bg-blue-500 hover:opacity-90 text-white"
           >
             العودة للصفحة الرئيسية
@@ -44,5 +44,5 @@ export default function Error({ error, reset }: props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-import Home from "./home";
+import Home from './home'
 
-export const metadata = generateMetadata();
+export const metadata = generateMetadata()
 
 function generateMetadata() {
-  const title = "Open-Mushaf";
-  const description = "المحف المفتوح المصدر";
+  const title = 'Open-Mushaf'
+  const description = 'المحف المفتوح المصدر'
   const openGraph = {
     title,
     description,
-  };
+  }
 
   return {
     title,
     description,
     openGraph,
-  };
+  }
 }
 export default function Page() {
-  return <Home />;
+  return <Home />
 }

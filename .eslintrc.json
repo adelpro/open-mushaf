@@ -1,3 +1,10 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "prettier"],
+  "plugins": ["prettier", "jsx-a11y"],
+  "rules": {
+    "prettier/prettier": "error",
+    "jsx-a11y/anchor-is-valid": "warn",
+    "jsx-a11y/alt-text": "warn",
+    "jsx-a11y/label-has-associated-control": "warn"
+  }
 }

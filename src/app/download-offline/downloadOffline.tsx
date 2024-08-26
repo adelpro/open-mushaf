@@ -1,16 +1,15 @@
-"use client";
-import useDownloadassetsOffLine from "@/hooks/useDownloadassetsOffLine";
-import { cn } from "@/utils/cn";
-import React from "react";
+'use client'
+import useDownloadassetsOffLine from '@/hooks/useDownloadassetsOffLine'
+import { cn } from '@/utils/cn'
+import React from 'react'
 
 export default function DownloadOffline() {
-  const { total, status, progress, downloadAssets } =
-    useDownloadassetsOffLine();
+  const { total, status, progress, downloadAssets } = useDownloadassetsOffLine()
 
-  const percentage = total > 0 ? (progress / total) * 100 : 0;
-  const radius = 54;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percentage / 100) * circumference;
+  const percentage = total > 0 ? (progress / total) * 100 : 0
+  const radius = 54
+  const circumference = 2 * Math.PI * radius
+  const offset = circumference - (percentage / 100) * circumference
 
   return (
     <div className="flex flex-col justify-center items-center h-screen w-full gap-2">
@@ -36,7 +35,7 @@ export default function DownloadOffline() {
               strokeDashoffset={offset}
               transform="rotate(-90 60 60)"
               style={{
-                transition: "stroke-dashoffset 0.3s ease",
+                transition: 'stroke-dashoffset 0.3s ease',
               }}
             />
             <text
@@ -59,14 +58,14 @@ export default function DownloadOffline() {
         disabled={percentage !== 0}
         aria-disabled={percentage !== 0}
         className={cn(
-          "w-full max-w-md transition duration-300 ease-in-out mx-4 my-2 px-4 py-2 font-medium rounded bg-blue-600 hover:opacity-90 text-white",
+          'w-full max-w-md transition duration-300 ease-in-out mx-4 my-2 px-4 py-2 font-medium rounded bg-blue-600 hover:opacity-90 text-white',
           {
-            "cursor-not-allowed": percentage !== 0,
+            'cursor-not-allowed': percentage !== 0,
           }
         )}
       >
         تحميل المعطيات
       </button>
     </div>
-  );
+  )
 }

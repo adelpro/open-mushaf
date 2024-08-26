@@ -1,18 +1,18 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link'
+import React from 'react'
 export async function generateMetadata() {
-  const title = "Open-Mushaf - About";
-  const description = "حول الموقع";
+  const title = 'Open-Mushaf - About'
+  const description = 'حول الموقع'
   const openGraph = {
     title,
     description,
-  };
+  }
 
   return {
     title,
     description,
     openGraph,
-  };
+  }
 }
 export default function page() {
   return (
@@ -22,7 +22,7 @@ export default function page() {
         بسم الله الرحمن الرحيم
       </p>
       <p className="text-xl mb-8 text-center leading-relaxed">
-        مصحف المدينة المنورة برواية ورش عن طريق الأزرق، الموقع مفتوح المصدر على{" "}
+        مصحف المدينة المنورة برواية ورش عن طريق الأزرق، الموقع مفتوح المصدر على{' '}
         <Link
           href="https://github.com/adelpro/open-mushaf"
           className="text-blue-500 hover:underline"
@@ -31,7 +31,7 @@ export default function page() {
         </Link>
       </p>
       <p className="text-xl mb-6 text-center">
-        من برمجة وتصميم{" "}
+        من برمجة وتصميم{' '}
         <Link
           href="https://github.com/adelpro"
           className="text-blue-500 hover:underline"
@@ -40,5 +40,5 @@ export default function page() {
         </Link>
       </p>
     </div>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import React from "react";
-import surahdata from "@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json";
-import SurahCard from "./surahCard";
-import { Surah } from "@/types";
+import React from 'react'
+import surahdata from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
+import SurahCard from './surahCard'
+import { Surah } from '@/types'
 export default function SurahList() {
   return (
     <div
@@ -13,5 +13,5 @@ export default function SurahList() {
         <SurahCard key={surah.number} surah={surah} />
       ))}
     </div>
-  );
+  )
 }
