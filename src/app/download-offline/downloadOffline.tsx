@@ -59,7 +59,7 @@ export default function DownloadOffline() {
         disabled={percentage !== 0}
         aria-disabled={percentage !== 0}
         className={cn(
-          "w-full max-w-md transition duration-300 ease-in-out mc-4 my-2 px-4 py-2 font-medium rounded bg-blue-600 hover:opacity-90 text-white",
+          "w-full max-w-md transition duration-300 ease-in-out mx-4 my-2 px-4 py-2 font-medium rounded bg-blue-600 hover:opacity-90 text-white",
           {
             "cursor-not-allowed": percentage !== 0,
           }

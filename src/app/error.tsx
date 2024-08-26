@@ -31,12 +31,12 @@ export default function Error({ error, reset }: props) {
         <div className="mt-6 flex flex-col md:flex-row gap-2">
           <button
             onClick={() => router.push("/")}
-            className="w-full max-w-md transition duration-300 ease-in-out mc-4 my-2 px-4 py-2 font-medium rounded bg-blue-500 hover:opacity-90 text-white"
+            className="w-full max-w-md transition duration-300 ease-in-out mx-4 my-2 px-4 py-2 font-medium rounded bg-blue-500 hover:opacity-90 text-white"
           >
             العودة للصفحة الرئيسية
           </button>
           <button
-            className="w-full max-w-md transition duration-300 ease-in-out mc-4 my-2 px-4 py-2 font-medium rounded bg-slate-400 hover:opacity-90 texte-slate-800"
+            className="w-full max-w-md transition duration-300 ease-in-out mx-4 my-2 px-4 py-2 font-medium rounded bg-slate-400 hover:opacity-90 texte-slate-800"
             onClick={reset}
           >
             حاول مجددا
