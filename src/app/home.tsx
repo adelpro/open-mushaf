@@ -10,8 +10,6 @@ export default function Home() {
   const [showSurahList, setShowSurahList] = useState(false)
 
   useEffect(() => {
-    console.log('index:', index, typeof index, index === '1')
-
     if (index === '1') {
       setShowSurahList(true)
       return

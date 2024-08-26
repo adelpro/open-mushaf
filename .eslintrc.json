@@ -1,10 +1,54 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["prettier", "jsx-a11y"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "react", 
+    "react-hooks" 
+  ],
+  "plugins": [
+    "prettier",
+    "import",
+    "jsx-a11y"
+  ],
   "rules": {
-    "prettier/prettier": "error",
-    "jsx-a11y/anchor-is-valid": "warn",
+    "prettier/prettier": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "jsx-a11y/alt-text": "warn",
-    "jsx-a11y/label-has-associated-control": "warn"
+    "jsx-a11y/anchor-is-valid": "warn",
+    "jsx-a11y/aria-role": "warn",
+    "jsx-a11y/aria-unsupported-elements": "warn",
+    "jsx-a11y/heading-has-content": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "react/react-in-jsx-scope": "off", 
+    "react/prop-types": "off", 
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn" 
+  },
+  "settings": {
+    "react": {
+      "version": "detect" 
+    }
   }
 }
