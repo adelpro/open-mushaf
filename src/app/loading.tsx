@@ -2,7 +2,7 @@ import Skeleton from '@/components/skeleton'
 
 export default function loading() {
   return (
-    <div className="flex justify-center items-center mt-10">
+    <div className="flex justify-center items-center h-screen w-full">
       <Skeleton />
     </div>
   )
