@@ -1,12 +1,10 @@
-"use client"
+'use client'
 import { isPWASupported } from '@/utils/isPWASupported'
-import React from 'react'
-import DownloadOffline from './downloadOffline'
 import Link from 'next/link'
+import DownloadOffline from './downloadOffline'
 
 export default function DownloadOfflinePage() {
-
-      return isPWASupported() ? (
+  return isPWASupported() ? (
     <div className="container p-2">
       <DownloadOffline />
     </div>
@@ -33,5 +31,4 @@ export default function DownloadOfflinePage() {
       </div>
     </div>
   )
-
 }

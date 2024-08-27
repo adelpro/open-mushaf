@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react'
 
 export async function generateMetadata() {
   const title = 'Open-Mushaf - Contact'

@@ -5,4 +5,3 @@ export const isPWASupported = (): boolean => {
 
   return 'serviceWorker' in navigator
 }
-

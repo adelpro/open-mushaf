@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Success from './Success'
 
 export async function generateMetadata() {

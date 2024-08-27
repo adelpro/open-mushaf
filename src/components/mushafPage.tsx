@@ -1,18 +1,18 @@
-import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
 import { bookBase64 as placeHolder } from '@/asset/bookBase64'
-import usePageOverlay from '@/hooks/usePageOverlay'
-import useLocalStorage from '@/hooks/useLocalStorage'
 import {
   defaultPageHeight,
   defaultPageWidth,
 } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+import useLocalStorage from '@/hooks/useLocalStorage'
+import usePageOverlay from '@/hooks/usePageOverlay'
 import useSwipe from '@/hooks/useSwipe'
-import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { Suspense, useEffect, useRef, useState } from 'react'
+import Spinner from './spinner'
 
 const AyaPopup = dynamic(() => import('./ayaPopup'), { ssr: false })
-
 type Props = {
   index: number
 }
@@ -81,7 +81,9 @@ export default function MushafPage({ index }: Props) {
       ) : (
         <></>
       )}
-      <div className="items-center justify-center">{...overlay}</div>
+      <Suspense fallback={<Spinner />}>
+        <div className="items-center justify-center">{...overlay}</div>
+      </Suspense>
     </div>
   )
 }

@@ -1,7 +1,6 @@
-import React from 'react'
 import surahdata from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
-import SurahCard from './surahCard'
 import { Surah } from '@/types'
+import SurahCard from './surahCard'
 export default function SurahList() {
   return (
     <div

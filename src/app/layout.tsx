@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 //import { Amiri } from 'next/font/google'
 
-import './globals.css'
 import NavMenu from '@/components/navMenu'
+import './globals.css'
 
 /* const amiri = Amiri({
   weight: ['400', '700'],
@@ -10,7 +10,7 @@ import NavMenu from '@/components/navMenu'
   display: 'swap'
 }) */
 import { Inter } from 'next/font/google'
- 
+
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({ subsets: ['latin'] })
 const rtl = true
@@ -27,7 +27,6 @@ export const viewport = {
 type Props = {
   children: React.ReactNode
 }
-
 
 export default function RootLayout({ children }: Props) {
   return (

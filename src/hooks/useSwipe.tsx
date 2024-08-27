@@ -12,23 +12,25 @@ interface SwipeOutput {
 }
 
 const useSwipe = (input: SwipeInput): SwipeOutput => {
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   const minSwipeDistance = 50
 
   const onTouchStart = (e: TouchEvent) => {
-    setTouchEnd(0) // otherwise the swipe is fired even with usual touch events
+    setTouchEnd(null) // Reset touchEnd
     setTouchStart(e.targetTouches[0].clientX)
   }
 
   const onTouchMove = (e: TouchEvent) => setTouchEnd(e.targetTouches[0].clientX)
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
+    if (touchStart === null || touchEnd === null) return
+
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
+
     if (isLeftSwipe) {
       input.onSwipedLeft()
     }
@@ -43,4 +45,5 @@ const useSwipe = (input: SwipeInput): SwipeOutput => {
     onTouchEnd,
   }
 }
+
 export default useSwipe

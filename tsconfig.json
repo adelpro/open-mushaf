@@ -21,6 +21,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "exclude": ["node_modules"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -28,6 +29,5 @@
     ".next/types/**/*.ts",
     "src/utils/service-worker.js",
     "next.config.mjs"
-  ],
-  "exclude": ["node_modules"]
+  ]
 }

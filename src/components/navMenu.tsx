@@ -1,9 +1,9 @@
 'use client'
-import React, { useState } from 'react'
-import NavButton from './navButton'
-import Link from 'next/link'
-import { cn } from '@/utils/cn'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { cn } from '@/utils/cn'
+import Link from 'next/link'
+import { useState } from 'react'
+import NavButton from './navButton'
 export default function NavMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const [index, _] = useLocalStorage<string>('index', '1')

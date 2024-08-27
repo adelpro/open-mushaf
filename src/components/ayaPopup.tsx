@@ -1,14 +1,14 @@
 import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
+import tafseerBaghawy from '@/data/tafaseer/baghawy.json'
 import tafseerKatheer from '@/data/tafaseer/katheer.json'
 import tafseerMa3any from '@/data/tafaseer/ma3any.json'
-import tafseerBaghawy from '@/data/tafaseer/baghawy.json'
 import tafseerMuyassar from '@/data/tafaseer/muyassar.json'
 import tafseerQortoby from '@/data/tafaseer/qortoby.json'
-import tafseerTabary from '@/data/tafaseer/tabary.json'
 import tafseerSaady from '@/data/tafaseer/saady.json'
+import tafseerTabary from '@/data/tafaseer/tabary.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
-import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/utils/cn'
+import { useEffect, useRef, useState } from 'react'
 
 type Props = {
   show: boolean

@@ -1,5 +1,4 @@
 import ChapterList from '@/components/chapterList'
-import React from 'react'
 export async function generateMetadata() {
   const title = 'Open-Mushaf - chapters'
   const description = 'قائمة الأجزاء'

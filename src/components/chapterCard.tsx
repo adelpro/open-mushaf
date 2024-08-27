@@ -1,7 +1,6 @@
-import Link from 'next/link'
-import React from 'react'
 import backgroundSurahCardLeft from '@/asset/background-surah-list-left.png'
 import { Chapter } from '@/types'
+import Link from 'next/link'
 type Props = {
   chapter: Chapter
 }

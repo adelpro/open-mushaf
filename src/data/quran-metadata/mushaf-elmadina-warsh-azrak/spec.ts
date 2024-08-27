@@ -12,13 +12,13 @@ const defaultFirstPAgesMarginX = 120
 const defaultFirstPagesMarginY = 20
 
 export {
-  defaultPageHeight,
-  defaultMarginX,
-  defaultPageWidth,
-  defaultMarginY,
-  defaultLineHeight,
-  defaultNumberOfPages,
-  defaultFirstPagesWidth,
   defaultFirstPAgesMarginX,
   defaultFirstPagesMarginY,
+  defaultFirstPagesWidth,
+  defaultLineHeight,
+  defaultMarginX,
+  defaultMarginY,
+  defaultNumberOfPages,
+  defaultPageHeight,
+  defaultPageWidth,
 }

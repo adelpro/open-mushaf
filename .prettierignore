@@ -1,3 +1,25 @@
-.next
-node_modules
-*-lock.json  
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output directories
+.next/
+dist/
+
+# Ignore specific directories or files
+public/
+coverage/
+
+# Ignore environment or configuration files
+*.env
+*.env.local
+
+# Ignore minified files and vendor scripts
+**/*.min.js
+**/vendor/*.js
+
+# Ignore JSON files that shouldn't be auto-formatted
+**/large-config.json
+**/data/*.json
+
+# Ignore any generated files
+*.generated.*

@@ -1,7 +1,6 @@
 'use client'
 import useDownloadassetsOffLine from '@/hooks/useDownloadassetsOffLine'
 import { cn } from '@/utils/cn'
-import React from 'react'
 
 export default function DownloadOffline() {
   const { total, status, progress, downloadAssets } = useDownloadassetsOffLine()

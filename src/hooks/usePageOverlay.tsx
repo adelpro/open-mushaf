@@ -1,18 +1,20 @@
+import React, { useState } from 'react'
+
 import { coordinateElMadinaWarshAzrak } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/aya'
 import {
+  defaultFirstPAgesMarginX,
+  defaultFirstPagesMarginY,
+  defaultFirstPagesWidth,
   defaultLineHeight,
   defaultMarginX,
   defaultMarginY,
   defaultPageHeight,
   defaultPageWidth,
-  defaultFirstPagesWidth,
-  defaultFirstPAgesMarginX,
-  defaultFirstPagesMarginY,
 } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
 import { Aya, Page } from '@/types'
 import { getDimensionCoeff } from '@/utils/getDimensionCoeff'
 
-import { useState } from 'react'
+
 
 type SelectedAya = {
   aya: number
@@ -67,7 +69,7 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
 
   let prevX = marginX
 
-  let overlay: JSX.Element[] = []
+  let overlay: React.JSX.Element[] = []
 
   const page: Page = coordinateElMadinaWarshAzrak[Number(index)]
   const ayaClick = ({ aya, sura }: { aya: number; sura: number }) => {

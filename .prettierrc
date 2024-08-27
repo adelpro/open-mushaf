@@ -1,11 +1,12 @@
 {
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "semi": false,
-  "tabWidth": 2,
+  "endOfLine": "lf",
   "plugins": [
     "prettier-plugin-tailwindcss",
     "prettier-plugin-organize-imports",
     "prettier-plugin-sort-json"
-  ]
+  ],
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
 }
