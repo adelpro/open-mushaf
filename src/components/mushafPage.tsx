@@ -6,6 +6,7 @@ import {
 import useLocalStorage from '@/hooks/useLocalStorage'
 import usePageOverlay from '@/hooks/usePageOverlay'
 import useSwipe from '@/hooks/useSwipe'
+import { cn } from '@/utils/cn'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -50,7 +51,7 @@ export default function MushafPage({ index }: Props) {
   }, [])
   return (
     <div
-      className="relative flex flex-col justify-center items-center w-full max-w-md inset-0"
+      className="relative flex flex-col justify-center items-center w-full h-screen max-w-md inset-0"
       {...swipeHandlers}
     >
       <div className="w-full items-center justify-center">
@@ -60,7 +61,10 @@ export default function MushafPage({ index }: Props) {
           alt="image"
           width={defaultPageWidth}
           height={defaultPageHeight}
-          className="w-full h-full object-cover"
+          className={cn(
+            'w-full h-screen object-fill',
+            `md:max-h-[${defaultPageHeight - 10}px] md:max-w-[${defaultPageWidth}px]`
+          )}
           onLoad={() => {
             setIndex(Number(index))
           }}
