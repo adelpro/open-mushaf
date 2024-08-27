@@ -2,7 +2,6 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { bookBase64 as placeHolder } from '@/asset/bookBase64'
 import usePageOverlay from '@/hooks/usePageOverlay'
-import AyaPopup from './ayaPopup'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import {
   defaultPageHeight,
@@ -10,6 +9,9 @@ import {
 } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
 import useSwipe from '@/hooks/useSwipe'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
+
+const AyaPopup = dynamic(() => import('./ayaPopup'), { ssr: false })
 
 type Props = {
   index: number
