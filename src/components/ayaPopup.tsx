@@ -98,7 +98,10 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   useEffect(() => {
     const handleMouseResize = (e: MouseEvent) => {
       if (isResizing && popupRef.current) {
-        const newHeight = window.innerHeight - e.clientY
+        let newHeight = window.innerHeight - e.clientY
+        if (newHeight > window.innerHeight-30) {
+          newHeight = window.innerHeight - 30
+        }
         setPopupHeight(newHeight)
       }
     }
