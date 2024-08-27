@@ -1,11 +1,13 @@
 'use client'
 
-import Skeleton from '@/components/skeleton'
-import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+import { Suspense } from 'react'
+
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
-import { Suspense } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
+
+import Skeleton from '@/components/skeleton'
+import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
 
 const MushafPage = dynamic(() => import('@/components/mushafPage'), {
   suspense: true,

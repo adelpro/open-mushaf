@@ -1,7 +1,11 @@
 'use client'
-import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
-import { useRouter } from 'next/navigation'
+
 import { useState } from 'react'
+
+import { useRouter } from 'next/navigation'
+
+import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+
 const useDownloadassetsOffLine = () => {
   const router = useRouter()
   const [status, setStatus] = useState<string>('')

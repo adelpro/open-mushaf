@@ -1,10 +1,11 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import successSVG from '@/asset/success.svg'
-import { useEffect } from 'react'
 
 export default function Success() {
   const searchParams = useSearchParams()

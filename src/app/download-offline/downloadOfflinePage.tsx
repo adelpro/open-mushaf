@@ -1,6 +1,8 @@
 'use client'
-import { isPWASupported } from '@/utils/isPWASupported'
 import Link from 'next/link'
+
+import { isPWASupported } from '@/utils/isPWASupported'
+
 import DownloadOffline from './downloadOffline'
 
 export default function DownloadOfflinePage() {

@@ -1,5 +1,6 @@
 import chapterdata from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/chapter.json'
 import { Chapter } from '@/types'
+
 import ChapterCard from './chapterCard'
 export default function ChapterList() {
   return (

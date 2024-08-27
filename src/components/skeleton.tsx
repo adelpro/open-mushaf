@@ -1,5 +1,6 @@
-import gears from '@/asset/gear.svg'
 import Image from 'next/image'
+
+import gears from '@/asset/gear.svg'
 export default function Skeleton() {
   return (
     <div

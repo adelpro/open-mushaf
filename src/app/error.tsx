@@ -1,6 +1,7 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+
+import { useRouter } from 'next/navigation'
 
 type props = {
   error: Error & { digest?: string }

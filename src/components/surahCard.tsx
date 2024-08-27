@@ -1,6 +1,8 @@
+import Link from 'next/link'
+
 import backgroundSurahCardLeft from '@/asset/background-surah-list-left.png'
 import { Surah } from '@/types'
-import Link from 'next/link'
+
 type Props = {
   surah: Surah
 }

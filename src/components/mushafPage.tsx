@@ -1,3 +1,9 @@
+import { Suspense, useEffect, useRef, useState } from 'react'
+
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+
 import { bookBase64 as placeHolder } from '@/asset/bookBase64'
 import {
   defaultPageHeight,
@@ -7,10 +13,7 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 import usePageOverlay from '@/hooks/usePageOverlay'
 import useSwipe from '@/hooks/useSwipe'
 import { cn } from '@/utils/cn'
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { Suspense, useEffect, useRef, useState } from 'react'
+
 import Spinner from './spinner'
 
 const AyaPopup = dynamic(() => import('./ayaPopup'), { ssr: false })

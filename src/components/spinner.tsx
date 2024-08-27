@@ -1,5 +1,7 @@
-import gears from '@/asset/spinner.svg'
 import Image from 'next/image'
+
+import gears from '@/asset/spinner.svg'
+
 export default function Spinner() {
   return (
     <div

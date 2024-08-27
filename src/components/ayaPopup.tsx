@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
 import tafseerBaghawy from '@/data/tafaseer/baghawy.json'
 import tafseerKatheer from '@/data/tafaseer/katheer.json'
@@ -8,7 +10,6 @@ import tafseerSaady from '@/data/tafaseer/saady.json'
 import tafseerTabary from '@/data/tafaseer/tabary.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { cn } from '@/utils/cn'
-import { useEffect, useRef, useState } from 'react'
 
 type Props = {
   show: boolean
@@ -99,7 +100,7 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
     const handleMouseResize = (e: MouseEvent) => {
       if (isResizing && popupRef.current) {
         let newHeight = window.innerHeight - e.clientY
-        if (newHeight > window.innerHeight-30) {
+        if (newHeight > window.innerHeight - 30) {
           newHeight = window.innerHeight - 30
         }
         setPopupHeight(newHeight)
@@ -110,7 +111,7 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
       if (isResizing && popupRef.current) {
         const touch = e.touches[0]
         let newHeight = window.innerHeight - touch.clientY
-        if (newHeight > window.innerHeight-30) {
+        if (newHeight > window.innerHeight - 30) {
           newHeight = window.innerHeight - 30
         }
         setPopupHeight(newHeight)

@@ -1,13 +1,12 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "eslint:recommended",
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["import", "jsx-a11y", "prettier", "@typescript-eslint"],
+
+  "plugins": ["import", "jsx-a11y", "prettier"],
   "rules": {
     "prettier/prettier": "warn",
     "import/order": [

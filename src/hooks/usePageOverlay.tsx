@@ -14,8 +14,6 @@ import {
 import { Aya, Page } from '@/types'
 import { getDimensionCoeff } from '@/utils/getDimensionCoeff'
 
-
-
 type SelectedAya = {
   aya: number
   sura: number

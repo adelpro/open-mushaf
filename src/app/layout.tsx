@@ -1,18 +1,12 @@
 import type { Metadata } from 'next'
-//import { Amiri } from 'next/font/google'
+import { Amiri } from 'next/font/google'
 
 import NavMenu from '@/components/navMenu'
 import './globals.css'
 
-/* const amiri = Amiri({
-  weight: ['400', '700'],
-  subsets: ['arabic'],
-  display: 'swap'
-}) */
-import { Inter } from 'next/font/google'
-
 // If loading a variable font, you don't need to specify the font weight
-const inter = Inter({ subsets: ['latin'] })
+const amiri = Amiri({ weight: ['400', '700'], subsets: ['arabic'] })
+
 const rtl = true
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -36,7 +30,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="ar" dir={`${rtl ? 'rtl' : 'ltr'}`}>
-      <body className={inter.className}>
+      <body className={amiri.className}>
         <NavMenu />
         {children}
       </body>
