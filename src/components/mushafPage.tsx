@@ -62,7 +62,7 @@ export default function MushafPage({ index }: Props) {
           width={defaultPageWidth}
           height={defaultPageHeight}
           className={cn(
-            'w-full h-screen object-fill',
+            `w-full h-screen object-fill`,
             `md:max-h-[${defaultPageHeight}px] md:max-w-[${defaultPageWidth}px]`
           )}
           onLoad={() => {
