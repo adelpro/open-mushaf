@@ -15,8 +15,13 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 const rtl = true
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_FRONTEND_BASE_URL || 'http://localhost:3000'
+  ),
   title: 'مصحف المدينة المنورة - ورش',
   description: 'موقع لعرض اللمصحف الكريم برواية ورش عن طريق الأزرق',
+  category: 'website',
+  generator: 'Next.js',
 }
 
 export const viewport = {

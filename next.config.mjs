@@ -66,6 +66,7 @@ const runtimeCaching = [
       },
     },
   },
+
   // https request caching
   {
     urlPattern: /^https?.*/,
@@ -147,6 +148,12 @@ const pwaConfig = {
   cacheStartUrl: true,
   cacheOnFrontEndNav: true,
   runtimeCaching,
+  fallbacks: {
+    // Failed page requests fallback to this.
+    document: '/offline',
+    // This is for images.
+    image: '/offline.svg',
+  },
 }
 
 /* How this will work
