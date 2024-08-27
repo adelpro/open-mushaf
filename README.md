@@ -28,12 +28,12 @@ An open source implementation of the Quran mushaf in [typescript](https://www.ty
 
 First, install the dependencies:
 
-```
+```{shell}
 npm install
 ```
 
 Then start the development server:
 
-```
+```{shell}
 npm run dev
 ```

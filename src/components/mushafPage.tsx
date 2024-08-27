@@ -51,10 +51,10 @@ export default function MushafPage({ index }: Props) {
   }, [])
   return (
     <div
-      className="relative flex flex-col justify-center items-center w-full h-screen max-w-md inset-0"
+      className="relative flex flex-col justify-center items-center w-full max-w-md inset-0 h-screen overflow-hidden"
       {...swipeHandlers}
     >
-      <div className="w-full items-center justify-center">
+      <div className="w-full items-center justify-center inset-0">
         <Image
           ref={pageImageRef}
           src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
@@ -63,7 +63,7 @@ export default function MushafPage({ index }: Props) {
           height={defaultPageHeight}
           className={cn(
             'w-full h-screen object-fill',
-            `md:max-h-[${defaultPageHeight - 10}px] md:max-w-[${defaultPageWidth}px]`
+            `md:max-h-[${defaultPageHeight}px] md:max-w-[${defaultPageWidth}px]`
           )}
           onLoad={() => {
             setIndex(Number(index))
@@ -74,7 +74,7 @@ export default function MushafPage({ index }: Props) {
           placeholder="blur"
         />
       </div>
-      <span className="text-gray-500 ">الصفحة {index}</span>
+      {/* <span className="text-gray-500 ">الصفحة {index}</span> */}
       {show ? (
         <AyaPopup
           aya={selectedAya.aya}
@@ -86,7 +86,9 @@ export default function MushafPage({ index }: Props) {
         <></>
       )}
       <Suspense fallback={<Spinner />}>
-        <div className="items-center justify-center">{...overlay}</div>
+        <div className="fixed bottom-0 left-0 w-full items-center justify-center">
+          {...overlay}
+        </div>
       </Suspense>
     </div>
   )
