@@ -106,7 +106,10 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
     const handleTouchResize = (e: TouchEvent) => {
       if (isResizing && popupRef.current) {
         const touch = e.touches[0]
-        const newHeight = window.innerHeight - touch.clientY
+        let newHeight = window.innerHeight - touch.clientY
+        if (newHeight > window.innerHeight-30) {
+          newHeight = window.innerHeight - 30
+        }
         setPopupHeight(newHeight)
       }
     }
