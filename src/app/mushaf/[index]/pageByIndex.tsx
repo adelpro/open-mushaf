@@ -38,12 +38,12 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
   return (
     <Suspense
       fallback={
-        <div className="flex flex-col justify-center items-center m-5">
+        <div className="flex flex-col justify-center items-center insert-0">
           <div className="animate-pulse h-28 w-12 bg-gray-300 rounded-lg"></div>
         </div>
       }
     >
-      <div className="flex flex-col justify-center items-center m-5">
+      <div className="flex flex-col justify-center items-center insert-0">
         <MushafPage index={Number(index)} />
       </div>
     </Suspense>

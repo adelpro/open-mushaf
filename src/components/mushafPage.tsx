@@ -51,20 +51,17 @@ export default function MushafPage({ index }: Props) {
   }, [])
   return (
     <div
-      className="relative flex flex-col justify-center items-center w-full max-w-md inset-0 h-screen overflow-hidden"
+      className="relative flex flex-col justify-center items-center w-full max-w-md insert-0 h-screen overflow-hidden"
       {...swipeHandlers}
     >
-      <div className="w-full items-center justify-center inset-0">
+      <div className="w-full flex items-center justify-center inset-0">
         <Image
           ref={pageImageRef}
           src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
-          alt="image"
+          alt="Mushaf page"
           width={defaultPageWidth}
           height={defaultPageHeight}
-          className={cn(
-            `w-full h-screen object-fill`,
-            `md:max-h-[${defaultPageHeight}px] md:max-w-[${defaultPageWidth}px]`
-          )}
+          className={cn(`h-screen max-h-md w-full max-w-md object-fill`)}
           onLoad={() => {
             setIndex(Number(index))
           }}
@@ -86,9 +83,7 @@ export default function MushafPage({ index }: Props) {
         <></>
       )}
       <Suspense fallback={<Spinner />}>
-        <div className="fixed bottom-0 left-0 w-full items-center justify-center">
-          {...overlay}
-        </div>
+        <div className="w-full">{...overlay}</div>
       </Suspense>
     </div>
   )
