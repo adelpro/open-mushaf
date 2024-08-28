@@ -18,13 +18,13 @@ export default function NavMenu() {
 
   return (
     <div>
-      <div className="fixed flex items-end top-0 right-0 w-1 h-full bg-slate-600" />
+      <div className="fixed flex items-end top-0 right-0 w-1 h-full bg-slate-600 z-30" />
       {/* Menu button */}
       <NavButton isOpen={isOpen} toggleMenu={toggleMenu} />
 
       {/* Overlay */}
       <div
-        className={cn('absolute hidden bg-gray-800 opacity-50 z-30', {
+        className={cn('absolute hidden bg-gray-800 opacity-50', {
           'block inset-0': isOpen,
         })}
         onClick={() => setIsOpen(false)}
