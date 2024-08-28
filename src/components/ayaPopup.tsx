@@ -30,7 +30,7 @@ type Tabs =
   | 'saady'
 
 const tabLabels: Record<Tabs, string> = {
-  katheer: 'بن كثير',
+  katheer: 'ابن كثير',
   ma3any: 'معاني القرآن',
   baghawy: 'البغوي',
   muyassar: 'الميسر',
