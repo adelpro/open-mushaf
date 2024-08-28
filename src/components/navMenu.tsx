@@ -106,7 +106,7 @@ export default function NavMenu() {
             </Link>
           </li>
         </ul>
-        <span className="fixed bottom-0 right-0 p-2 bg-gray-700 text-sm text-gray-400 rounded-tl-md shadow-lg">
+        <span className="fixed bottom-0 right-0 p-2 bg-gray-700 text-sm text-gray-400 rounded-tl-md shadow-lg z-30">
           الإصدار: {appVersion}
         </span>
       </nav>

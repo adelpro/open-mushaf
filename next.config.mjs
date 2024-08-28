@@ -136,14 +136,14 @@ const runtimeCaching = [
 ]
 const pwaConfig = {
   dest: 'public',
-  disable: process.env.NODE_ENV !== 'production',
+  //disable: process.env.NODE_ENV !== 'production',
   register: true,
   skipWaiting: true,
   clientsClaim: true,
   maximumFileSizeToCacheInBytes: 100 * 1024 * 1024, // 100MB
   // for more information: https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
   // Must be false to precache the home page url ('/')
-  dynamicStartUrl: false,
+  //dynamicStartUrl: false,
   //buildExcludes: [/middleware-manifest.json$/],
   cacheStartUrl: true,
   cacheOnFrontEndNav: true,
