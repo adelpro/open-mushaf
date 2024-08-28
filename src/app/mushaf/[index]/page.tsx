@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: { params: Params }) {
   }
   const title = `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`
   const description = `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`
-  const url = `${process.env.NEXT_PUBLIC_APP_URL}/mushaf/${index}`
+  const url = `/mushaf/${index}`
   const OGImage = {
     url,
     width: 430,
     height: 616,
-    alt: `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`,
+    alt: `Open-Mushaf - مصحف المدينة المنورة - ورش - (${index})`,
   }
   const openGraph = {
     title,

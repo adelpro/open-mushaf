@@ -94,6 +94,8 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
         className={`absolute cursor-pointer`}
         data-aya={aya[1]}
         data-sura={aya[0]}
+        aria-label={`aya - ${aya[1]} sura - ${aya[0]}`}
+        aria-hidden={selectedAya.aya !== aya[1] && selectedAya.sura !== aya[0]}
         style={{
           top: `${X}px`,
           left: `${Y - marginY}px`,
@@ -125,6 +127,10 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
           data-sura={aya[0]}
           className={`absolute cursor-pointer`}
           onClick={() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })}
+          aria-label={`aya - ${aya[1]} sura - ${aya[0]}`}
+          aria-hidden={
+            selectedAya.aya !== aya[1] && selectedAya.sura !== aya[0]
+          }
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               ;() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })
@@ -159,6 +165,10 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
         <div
           data-aya={aya[1]}
           data-sura={aya[0]}
+          aria-label={`aya - ${aya[1]} sura - ${aya[0]}`}
+          aria-hidden={
+            selectedAya.aya !== aya[1] && selectedAya.sura !== aya[0]
+          }
           onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
