@@ -1,15 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 
 import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
-import tafseerBaghawy from '@/data/tafaseer/baghawy.json'
-import tafseerKatheer from '@/data/tafaseer/katheer.json'
-import tafseerMa3any from '@/data/tafaseer/ma3any.json'
-import tafseerMuyassar from '@/data/tafaseer/muyassar.json'
-import tafseerQortoby from '@/data/tafaseer/qortoby.json'
-import tafseerSaady from '@/data/tafaseer/saady.json'
-import tafseerTabary from '@/data/tafaseer/tabary.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { cn } from '@/utils/cn'
+
+import Spinner from './spinner'
 
 type Props = {
   show: boolean
@@ -34,51 +29,106 @@ type Tabs =
   | 'tabary'
   | 'saady'
 
+const tabLabels: Record<Tabs, string> = {
+  katheer: 'بن كثير',
+  ma3any: 'معاني القرآن',
+  baghawy: 'البغوي',
+  muyassar: 'الميسر',
+  qortoby: 'القرطبي',
+  tabary: 'الطبري',
+  saady: 'السعدي',
+}
+
 export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   const [popupHeight, setPopupHeight] = useLocalStorage<number>(
     'popupHeight',
     320
   )
   const [isResizing, setIsResizing] = useState(false)
-  const popupRef = useRef<HTMLDivElement>(null)
   const [selectedTab, setSelectedTab] = useLocalStorage<Tabs>(
     'selectedTafseer',
     'katheer'
   )
+  const [tafseerData, setTafseerData] = useState<TafseerAya | null>(null)
+  const [loading, setLoading] = useState(false)
+  const popupRef = useRef<HTMLDivElement>(null)
 
   const suraName = suraJSON[sura - 1].name
 
-  const tafseerKatheerArray: TafseerAya[] = tafseerKatheer as TafseerAya[]
-  const tafseerMa3anyArray: TafseerAya[] = tafseerMa3any as TafseerAya[]
-  const tafseerBaghawyArray: TafseerAya[] = tafseerBaghawy as TafseerAya[]
-  const tafseerMuyassarArray: TafseerAya[] = tafseerMuyassar as TafseerAya[]
-  const tafseerQurtubiArray: TafseerAya[] = tafseerQortoby as TafseerAya[]
-  const tafseerTabariArray: TafseerAya[] = tafseerTabary as TafseerAya[]
-  const tafseerSaadiArray: TafseerAya[] = tafseerSaady as TafseerAya[]
+  // Dynamic import for the selected tafseer
+  useEffect(() => {
+    const loadTafseerData = async () => {
+      setLoading(true)
+      let tafseerArray: TafseerAya[] = []
 
-  const tafseers: Record<Tabs, TafseerAya | undefined> = {
-    katheer: tafseerKatheerArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-    ma3any: tafseerMa3anyArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-    baghawy: tafseerBaghawyArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-    muyassar: tafseerMuyassarArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-    qortoby: tafseerQurtubiArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-    tabary: tafseerTabariArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-    saady: tafseerSaadiArray.find(
-      (tafseer: TafseerAya) => tafseer.aya === aya && tafseer.sura === sura
-    ),
-  }
+      switch (selectedTab) {
+        case 'katheer':
+          tafseerArray = (await import('@/data/tafaseer/katheer.json'))
+            .default as TafseerAya[]
+          break
+        case 'ma3any':
+          tafseerArray = (await import('@/data/tafaseer/ma3any.json'))
+            .default as TafseerAya[]
+          break
+        case 'baghawy':
+          tafseerArray = (await import('@/data/tafaseer/baghawy.json'))
+            .default as TafseerAya[]
+          break
+        case 'muyassar':
+          tafseerArray = (await import('@/data/tafaseer/muyassar.json'))
+            .default as TafseerAya[]
+          break
+        case 'qortoby':
+          tafseerArray = (await import('@/data/tafaseer/qortoby.json'))
+            .default as TafseerAya[]
+          break
+        case 'tabary':
+          tafseerArray = (await import('@/data/tafaseer/tabary.json'))
+            .default as TafseerAya[]
+          break
+        case 'saady':
+          tafseerArray = (await import('@/data/tafaseer/saady.json'))
+            .default as TafseerAya[]
+          break
+      }
+
+      setTafseerData(
+        tafseerArray.find(
+          (tafseer) => tafseer.aya === aya && tafseer.sura === sura
+        ) || null
+      )
+      setLoading(false)
+    }
+
+    loadTafseerData()
+  }, [selectedTab, aya, sura])
+
+  const startResize = () => setIsResizing(true)
+  const stopResize = () => setIsResizing(false)
+
+  useEffect(() => {
+    const handleResize = (e: MouseEvent | TouchEvent) => {
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY
+      if (isResizing && popupRef.current) {
+        let newHeight = window.innerHeight - clientY
+        if (newHeight > window.innerHeight - 30)
+          newHeight = window.innerHeight - 30
+        setPopupHeight(newHeight)
+      }
+    }
+
+    document.addEventListener('mousemove', handleResize)
+    document.addEventListener('mouseup', stopResize)
+    document.addEventListener('touchmove', handleResize)
+    document.addEventListener('touchend', stopResize)
+
+    return () => {
+      document.removeEventListener('mousemove', handleResize)
+      document.removeEventListener('mouseup', stopResize)
+      document.removeEventListener('touchmove', handleResize)
+      document.removeEventListener('touchend', stopResize)
+    }
+  }, [isResizing, setPopupHeight])
 
   const renderTafseerContent = (tafseerText: string | undefined) => (
     <div
@@ -87,70 +137,19 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
       }}
     />
   )
-
-  const startResize = () => {
-    setIsResizing(true)
-  }
-
-  const stopResize = () => {
-    setIsResizing(false)
-  }
-
-  useEffect(() => {
-    const handleMouseResize = (e: MouseEvent) => {
-      if (isResizing && popupRef.current) {
-        let newHeight = window.innerHeight - e.clientY
-        if (newHeight > window.innerHeight - 30) {
-          newHeight = window.innerHeight - 30
-        }
-        setPopupHeight(newHeight)
-      }
-    }
-
-    const handleTouchResize = (e: TouchEvent) => {
-      if (isResizing && popupRef.current) {
-        const touch = e.touches[0]
-        let newHeight = window.innerHeight - touch.clientY
-        if (newHeight > window.innerHeight - 30) {
-          newHeight = window.innerHeight - 30
-        }
-        setPopupHeight(newHeight)
-      }
-    }
-
-    document.addEventListener('mousemove', handleMouseResize)
-    document.addEventListener('mouseup', stopResize)
-    document.addEventListener('touchmove', handleTouchResize)
-    document.addEventListener('touchend', stopResize)
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseResize)
-      document.removeEventListener('mouseup', stopResize)
-      document.removeEventListener('touchmove', handleTouchResize)
-      document.removeEventListener('touchend', stopResize)
-    }
-  }, [isResizing, setPopupHeight])
-
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-end">
-      {/* Overlay */}
       <div
         className={cn(
           'absolute inset-0 bg-gray-800 transition-opacity duration-300',
           show ? 'opacity-50' : 'opacity-0'
         )}
         onClick={() => setShow(false)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            setShow(false)
-          }
-        }}
-        role="button"
-        tabIndex={0} // Makes the div focusable
+        onKeyDown={() => setShow(false)}
         aria-hidden={!show}
+        role="button"
+        tabIndex={0}
       />
-
-      {/* Popup */}
       <div
         ref={popupRef}
         className={cn(
@@ -160,20 +159,16 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
         )}
         style={{ height: `${popupHeight}px` }}
       >
-        {/* Resize Button */}
         <button
-          className=" w-full flex flex-col justify-center items-center cursor-s-resize p-1"
+          className="w-full flex flex-col justify-center items-center cursor-s-resize p-1"
           onMouseDown={startResize}
           onTouchStart={startResize}
           aria-label="Resize"
         >
-          <span className="max-w-md w-20 h-[1px] rounded-md mt-1 mb-[1px] bg-gray-500"></span>
-          <span className="max-w-md w-20 h-[1px] rounded-md mb-1 bg-gray-500"></span>
+          <span className="w-20 h-[1px] rounded-md mt-1 mb-[1px] bg-gray-500"></span>
+          <span className="w-20 h-[1px] rounded-md mb-1 bg-gray-500"></span>
         </button>
-
-        {/* overflow-y-auto */}
         <div className="h-full p-4 overflow-y-auto">
-          {/* Close Button */}
           <button
             className="text-gray-500 hover:text-gray-700 mb-2 float-left text-xl"
             onClick={() => setShow(false)}
@@ -184,83 +179,32 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
           <p className="text-lg leading-relaxed">
             {suraName} (<span className="font-bold">الأية</span> {aya})
           </p>
-          {/* Tab Buttons */}
-          <div className="flex justify-around mb-2" role="tablist">
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'katheer' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'katheer'}
-              role="tab"
-              onClick={() => setSelectedTab('katheer')}
-            >
-              بن كثير
-            </button>
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'ma3any' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'ma3any'}
-              role="tab"
-              onClick={() => setSelectedTab('ma3any')}
-            >
-              معاني القرآن
-            </button>
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'baghawy' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'baghawy'}
-              role="tab"
-              onClick={() => setSelectedTab('baghawy')}
-            >
-              البغوي
-            </button>
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'muyassar' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'muyassar'}
-              role="tab"
-              onClick={() => setSelectedTab('muyassar')}
-            >
-              الميسر
-            </button>
+
+          <div
+            className="flex flex-wrap justify-start gap-x-8 gap-y-2 my-5"
+            role="tablist"
+          >
+            {Object.keys(tabLabels).map((key) => {
+              const tabKey = key as Tabs // Type assertion to Tabs
+              return (
+                <button
+                  key={tabKey}
+                  className={`py-2 ${
+                    selectedTab === tabKey ? 'border-b-2 border-blue-500' : ''
+                  }`}
+                  aria-selected={selectedTab === tabKey}
+                  role="tab"
+                  onClick={() => setSelectedTab(tabKey)}
+                >
+                  {tabLabels[tabKey]}
+                </button>
+              )
+            })}
           </div>
-          <div className="flex justify-around mb-4" role="tablist">
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'qortoby' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'qortoby'}
-              role="tab"
-              onClick={() => setSelectedTab('qortoby')}
-            >
-              القرطبي
-            </button>
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'tabary' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'tabary'}
-              role="tab"
-              onClick={() => setSelectedTab('tabary')}
-            >
-              الطبري
-            </button>
-            <button
-              className={`py-2 px-4 ${
-                selectedTab === 'saady' ? 'border-b-2 border-blue-500' : ''
-              }`}
-              aria-selected={selectedTab === 'saady'}
-              role="tab"
-              onClick={() => setSelectedTab('saady')}
-            >
-              السعدي
-            </button>
-          </div>
-          {/* Tab Content */}
-          {renderTafseerContent(tafseers[selectedTab]?.text)}
+
+          <Suspense fallback={<Spinner />}>
+            {loading ? <Spinner /> : renderTafseerContent(tafseerData?.text)}
+          </Suspense>
         </div>
       </div>
     </div>

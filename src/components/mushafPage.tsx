@@ -76,12 +76,14 @@ export default function MushafPage({ index }: Props) {
       </div>
       {/* <span className="text-gray-500 ">الصفحة {index}</span> */}
       {show ? (
-        <AyaPopup
-          aya={selectedAya.aya}
-          sura={selectedAya.sura}
-          show={show}
-          setShow={setShow}
-        />
+        <Suspense fallback={<Spinner />}>
+          <AyaPopup
+            aya={selectedAya.aya}
+            sura={selectedAya.sura}
+            show={show}
+            setShow={setShow}
+          />
+        </Suspense>
       ) : (
         <></>
       )}
