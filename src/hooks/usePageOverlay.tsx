@@ -88,14 +88,12 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
     sura: number,
     backgroundColor: string
   ) => {
-    const isHidden = selectedAya.aya !== aya || selectedAya.sura !== sura
     return (
       <div
         className="absolute cursor-pointer"
         data-aya={aya}
         data-sura={sura}
         aria-label={`aya - ${aya} sura - ${sura}`}
-        aria-hidden={isHidden}
         style={{
           top: `${top}px`,
           left: `${left}px`,
