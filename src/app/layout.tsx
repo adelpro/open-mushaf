@@ -32,7 +32,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="ar" dir={`${rtl ? 'rtl' : 'ltr'}`}>
       <body className={amiri.className}>
         <NavMenu />
-        {children}
+        <main role="main">{children}</main>
       </body>
     </html>
   )
