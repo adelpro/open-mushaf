@@ -5,7 +5,7 @@ export default function Sitemap(): MetadataRoute.Sitemap {
     process.env.NEXT_PUBLIC_FRONTEND_BASE_URL || 'http://localhost:3000'
   for (let i = 1; i <= 604; i++) {
     pagesArray.push({
-      url: appURL + '/mushaf/mushaf-elmadina-warsh-azrak/' + i + '.png',
+      url: appURL + '/mushaf-data/mushaf-elmadina-warsh-azrak/' + i + '.png',
       lastModified: new Date(),
     })
   }

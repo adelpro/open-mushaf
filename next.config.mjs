@@ -56,7 +56,7 @@ const config = {
 const runtimeCaching = [
   //Cache Mushaf images
   {
-    urlPattern: '/mushaf/mushaf-elmadina-warsh-azrak/**',
+    urlPattern: '/mushaf-data/mushaf-elmadina-warsh-azrak/**',
     handler: 'CacheFirst',
     options: {
       cacheName: 'mushaf-images',

@@ -20,7 +20,7 @@ const useDownloadassetsOffLine = () => {
 
     setStatus('بدء التحميل...')
 
-    // fetch all images in public/mushaf/mushaf-elmadina-warsh-azrak from 1.png to 604.png the the baground
+    // fetch all images in public/mushaf-data/mushaf-elmadina-warsh-azrak from 1.png to 604.png the the baground
     const cache = await caches.open(CACHE_NAME)
     const cacheKeys = await cache.keys()
     const cachedUrls = new Set(cacheKeys.map((request) => request.url))
@@ -28,7 +28,7 @@ const useDownloadassetsOffLine = () => {
     let progressCount = 0
 
     for (let i = 1; i <= total; i++) {
-      const url = `/mushaf/mushaf-elmadina-warsh-azrak/${i}.png`
+      const url = `/mushaf-data/mushaf-elmadina-warsh-azrak/${i}.png`
 
       // Check if the URL is already cached and not expired
       if (cachedUrls.has(url)) {

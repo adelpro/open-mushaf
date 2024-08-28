@@ -60,7 +60,7 @@ export default function MushafPage({ index }: Props) {
       <div className="w-full flex items-center justify-center inset-0">
         <Image
           ref={pageImageRef}
-          src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
+          src={`/mushaf-data/mushaf-elmadina-warsh-azrak/${index}.png`}
           alt={`Mushaf page ${index}`}
           width={defaultPageWidth}
           height={defaultPageHeight}

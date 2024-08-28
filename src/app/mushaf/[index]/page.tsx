@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   }
   const title = `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`
   const description = `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`
-  const url = `/mushaf/${index}`
+  const url = `/mushaf-data/${index}.png`
   const OGImage = {
     url,
     width: 430,

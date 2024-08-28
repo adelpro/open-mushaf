@@ -21,7 +21,7 @@ export const generateStructuredDataGraph = (page: Page): Graph | null => {
     url: `${appURL}/pages/${slug}/`,
     image: {
       '@type': 'ImageObject',
-      url: `${appURL}/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`,
+      url: `${appURL}/mushaf-data/mushaf-elmadina-warsh-azrak/${index}.png`,
     },
     description: `Page ${index} of the Mushaf Quran`,
     datePublished: new Date().toISOString(),
