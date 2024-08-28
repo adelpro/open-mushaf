@@ -21,8 +21,6 @@ export default function Home() {
   }, [index, router])
 
   return (
-    <main className="container m-2">
-      {showSurahList ? <SurahList /> : <></>}
-    </main>
+    <main className="h-dvh m-2">{showSurahList ? <SurahList /> : <></>}</main>
   )
 }

@@ -54,17 +54,17 @@ export default function MushafPage({ index }: Props) {
   }, [])
   return (
     <div
-      className="relative flex flex-col justify-center items-center w-full max-w-md insert-0 h-screen overflow-hidden"
+      className="relative flex flex-col justify-center items-center w-full max-w-md insert-0 h-dvh overflow-hidden"
       {...swipeHandlers}
     >
       <div className="w-full flex items-center justify-center inset-0">
         <Image
           ref={pageImageRef}
           src={`/mushaf/mushaf-elmadina-warsh-azrak/${index}.png`}
-          alt="Mushaf page"
+          alt={`Mushaf page ${index}`}
           width={defaultPageWidth}
           height={defaultPageHeight}
-          className={cn(`h-screen max-h-md w-full max-w-md object-fill`)}
+          className={cn(`h-dvh max-h-md w-full max-w-md object-fill`)}
           onLoad={() => {
             setIndex(Number(index))
           }}
