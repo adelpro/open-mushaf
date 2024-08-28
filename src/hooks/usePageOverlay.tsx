@@ -18,10 +18,12 @@ type SelectedAya = {
   aya: number
   sura: number
 }
+
 type Props = {
   index: number
   dimensions: { customPageWidth: number; customPageHeight: number }
 }
+
 const usePageOverlay = ({ index, dimensions }: Props) => {
   const [selectedAya, setSelectedAya] = useState<SelectedAya>({
     aya: 0,
@@ -39,44 +41,78 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
     customDimension: customPageWidth,
   })
 
-  // correct dimensions
+  // Correct dimensions
   let marginX = defaultMarginX * heightCoeff
 
-  // correct dimensions for 1/2 pages
+  // Correct dimensions for 1/2 pages
   if (index <= 2) {
     marginX = defaultFirstPAgesMarginX * heightCoeff
   }
 
   const lineHeight = defaultLineHeight * heightCoeff
-
   let pageWidth = defaultPageWidth * widthCoeff
 
-  // correct dimensions for 1/2 pages
+  // Correct dimensions for 1/2 pages
   if (index <= 2) {
     pageWidth = defaultFirstPagesWidth * widthCoeff
   }
 
   let marginY = defaultMarginY * widthCoeff
 
-  // correct dimensions for 1/2 pages
+  // Correct dimensions for 1/2 pages
   if (index <= 2) {
     marginY = defaultFirstPagesMarginY * widthCoeff
   }
 
-  //
-
   let prevX = marginX
-
   let overlay: React.JSX.Element[] = []
 
   const page: Page = coordinateElMadinaWarshAzrak[Number(index)]
-  const ayaClick = ({ aya, sura }: { aya: number; sura: number }) => {
+
+  const handleAyaClick = ({ aya, sura }: { aya: number; sura: number }) => {
     setSelectedAya({ aya, sura })
     setShow(true)
   }
+
+  const handleKeyDown = (e: React.KeyboardEvent, aya: number, sura: number) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleAyaClick({ aya, sura })
+    }
+  }
+
+  const renderOverlayDiv = (
+    top: number,
+    left: number,
+    width: number,
+    aya: number,
+    sura: number,
+    backgroundColor: string
+  ) => {
+    const isHidden = selectedAya.aya !== aya || selectedAya.sura !== sura
+    return (
+      <div
+        className="absolute cursor-pointer"
+        data-aya={aya}
+        data-sura={sura}
+        aria-label={`aya - ${aya} sura - ${sura}`}
+        aria-hidden={isHidden}
+        style={{
+          top: `${top}px`,
+          left: `${left}px`,
+          width: `${width}px`,
+          height: `${lineHeight}px`,
+          backgroundColor,
+        }}
+        onClick={() => handleAyaClick({ aya, sura })}
+        onKeyDown={(e) => handleKeyDown(e, aya, sura)}
+        role="button"
+        tabIndex={0}
+      />
+    )
+  }
+
   page.map((aya: Aya) => {
     const defaultX: number = aya[2]
-
     const defaultY: number = aya[3]
 
     // Dimensions correction
@@ -89,122 +125,57 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
     const Y = defaultY * widthCoeff
 
     // Drawing overlay for aya line (first part before the aya marker)
-    const div = (
-      <div
-        className={`absolute cursor-pointer`}
-        data-aya={aya[1]}
-        data-sura={aya[0]}
-        aria-label={`aya - ${aya[1]} sura - ${aya[0]}`}
-        aria-hidden={selectedAya.aya !== aya[1] && selectedAya.sura !== aya[0]}
-        style={{
-          top: `${X}px`,
-          left: `${Y - marginY}px`,
-          width: `${pageWidth + marginY - Y}px`,
-          height: `${lineHeight}px`,
-          // border: "1px solid red",
-          backgroundColor: `${
-            show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
-              ? 'rgba(128, 128, 128, 0.5)'
-              : 'transparent'
-          }`,
-        }}
-        onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            ;() => ayaClick({ aya: aya[1], sura: aya[0] })
-          }
-        }}
-        role="button"
-        tabIndex={0}
-      ></div>
+    overlay.push(
+      renderOverlayDiv(
+        X,
+        Y - marginY,
+        pageWidth + marginY - Y,
+        aya[1],
+        aya[0],
+        show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
+          ? 'rgba(128, 128, 128, 0.5)'
+          : 'transparent'
+      )
     )
-    overlay = [...overlay, div]
+
     // Drawing overlay for aya line (last part after the aya marker in the same line)
     if (Y > 93) {
-      const divNextAya = (
-        <div
-          data-aya={aya[1] + 1}
-          data-sura={aya[0]}
-          className={`absolute cursor-pointer`}
-          onClick={() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })}
-          aria-label={`aya - ${aya[1]} sura - ${aya[0]}`}
-          aria-hidden={
-            selectedAya.aya !== aya[1] && selectedAya.sura !== aya[0]
-          }
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              ;() => ayaClick({ aya: aya[1] + 1, sura: aya[0] })
-            }
-          }}
-          role="button"
-          tabIndex={0}
-          style={{
-            top: `${X}px`,
-            left: `${marginY}px`,
-            width: `${Y - marginY * 2}px`,
-            height: `${lineHeight}px`,
-            //border: "1px solid blue",
-            backgroundColor: `${
-              show &&
-              selectedAya.aya === aya[1] + 1 &&
-              selectedAya.sura === aya[0]
-                ? 'rgba(128, 128, 128, 0.5)'
-                : 'transparent'
-            }`,
-          }}
-        ></div>
+      overlay.push(
+        renderOverlayDiv(
+          X,
+          marginY,
+          Y - marginY * 2,
+          aya[1] + 1,
+          aya[0],
+          show && selectedAya.aya === aya[1] + 1 && selectedAya.sura === aya[0]
+            ? 'rgba(128, 128, 128, 0.5)'
+            : 'transparent'
+        )
       )
-      overlay = [...overlay, divNextAya]
     }
 
     // Drawing overlay for multiple-line aya
     const numberOfLines: number = Math.ceil((X - prevX) / lineHeight)
 
     if (numberOfLines > 1) {
-      const fullDiv = (x: number) => (
-        <div
-          data-aya={aya[1]}
-          data-sura={aya[0]}
-          aria-label={`aya - ${aya[1]} sura - ${aya[0]}`}
-          aria-hidden={
-            selectedAya.aya !== aya[1] && selectedAya.sura !== aya[0]
-          }
-          onClick={() => ayaClick({ aya: aya[1], sura: aya[0] })}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              ;() => ayaClick({ aya: aya[1], sura: aya[0] })
-            }
-          }}
-          role="button"
-          tabIndex={0}
-          className={`absolute cursor-pointer`}
-          style={{
-            top: `${x}px`,
-            left: `${marginY}px`,
-            width: `${pageWidth - marginY}px`,
-            height: `${lineHeight}px`,
-            //border: "1px solid green",
-            backgroundColor: `${
+      let x = X
+      for (let i = 0; i < numberOfLines - 1; i++) {
+        x -= lineHeight
+        if (x >= 40 && selectedAya.aya !== 1) {
+          overlay.push(
+            renderOverlayDiv(
+              x,
+              marginY,
+              pageWidth - marginY,
+              aya[1],
+              aya[0],
               show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
                 ? 'rgba(128, 128, 128, 0.5)'
                 : 'transparent'
-            }`,
-          }}
-        ></div>
-      )
-      let i = numberOfLines
-      let x = X
-
-      do {
-        i = i - 1
-        x = x - lineHeight
-
-        // skip the first line of the page ( margin )
-        // skip the line befor the first aya (Containing the sura name)
-        if (x >= 40 && selectedAya.aya !== 1) {
-          overlay = [...overlay, fullDiv(x)]
+            )
+          )
         }
-      } while (i > 1)
+      }
     }
 
     prevX = X

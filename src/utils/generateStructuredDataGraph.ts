@@ -12,13 +12,11 @@ export const generateStructuredDataGraph = (page: Page): Graph | null => {
   if (!page) {
     return null
   }
-
-  const slug = page.index
   const structuredData: WithContext<CreativeWork> = {
     '@context': 'https://schema.org',
     '@type': 'Book',
     name: title,
-    url: `${appURL}/pages/${slug}/`,
+    url: `${appURL}/mushaf/${index}/`,
     image: {
       '@type': 'ImageObject',
       url: `${appURL}/mushaf-data/mushaf-elmadina-warsh-azrak/${index}.png`,

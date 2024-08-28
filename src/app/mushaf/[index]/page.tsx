@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: { params: Params }) {
   }
   const title = `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`
   const description = `Open-Mushaf - مصحف المدينة المنورة - ورش (${index})`
-  const url = `/mushaf-data/${index}.png`
+  const url = process.env.NEXT_PUBLIC_FRONTEND_BASE_URL
+  const imageURL = `/mushaf-data/mushaf-elmadina-warsh-azrak/${index}.png`
   const OGImage = {
     url,
     width: 430,
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     siteName: process.env.NEXT_PUBLIC_APP_NAME,
     type: 'website',
     locale: 'ar',
-    url,
+    url: imageURL,
     images: [OGImage],
   }
   const twitter = {
