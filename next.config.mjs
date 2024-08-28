@@ -70,6 +70,22 @@ const runtimeCaching = [
       },
     },
   },
+  // Cache tafasseer json
+  {
+    urlPattern: '/mushaf-data/tafasseer/**',
+    handler: 'CacheFirst',
+    options: {
+      cacheName: 'tafasseer-jsons',
+      expiration: {
+        maxEntries: 20,
+        maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+        purgeOnQuotaError: false, // Prevent automatic purge
+      },
+      cacheableResponse: {
+        statuses: [0, 200],
+      },
+    },
+  },
 
   // https request caching
   {

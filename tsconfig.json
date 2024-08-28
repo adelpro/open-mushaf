@@ -28,6 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/utils/service-worker.js",
-    "next.config.mjs"
+    "next.config.mjs",
+    "public/quran-metadata/mushaf-elmadina-warsh-azrak/spec.js"
   ]
 }

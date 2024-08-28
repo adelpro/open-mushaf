@@ -21,7 +21,7 @@ type Props = {
   index: number
 }
 
-export default function MushafPage({ index }: Props) {
+export default async function MushafPage({ index }: Props) {
   const router = useRouter()
   const swipeHandlers = useSwipe({
     onSwipedLeft: () => router.push(`/mushaf/${Number(index) - 1}`),
@@ -41,7 +41,7 @@ export default function MushafPage({ index }: Props) {
     customPageWidth: mushafPage.width,
     customPageHeight: mushafPage.height,
   }
-  const { overlay, selectedAya, show, setShow } = usePageOverlay({
+  const { overlay, selectedAya, show, setShow } = await usePageOverlay({
     index: Number(index),
     dimensions,
   })

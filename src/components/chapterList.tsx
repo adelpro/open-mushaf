@@ -1,8 +1,11 @@
-import chapterdata from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/chapter.json'
 import { Chapter } from '@/types'
 
 import ChapterCard from './chapterCard'
-export default function ChapterList() {
+export default async function ChapterList() {
+  const chapterdata: Chapter[] = (await fetch(
+    `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/chapter.json`
+  ).then((res) => res.json())) as Chapter[]
+
   return (
     <>
       <div

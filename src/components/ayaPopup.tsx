@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 
-import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { Surah } from '@/types'
 import { cn } from '@/utils/cn'
 
 import Spinner from './spinner'
@@ -39,7 +39,7 @@ const tabLabels: Record<Tabs, string> = {
   saady: 'السعدي',
 }
 
-export default function AyaPopup({ show, setShow, aya, sura }: Props) {
+export default async function AyaPopup({ show, setShow, aya, sura }: Props) {
   const [popupHeight, setPopupHeight] = useLocalStorage<number>(
     'popupHeight',
     320
@@ -52,7 +52,9 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   const [tafseerData, setTafseerData] = useState<TafseerAya | null>(null)
   const [loading, setLoading] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
-
+  const suraJSON: Surah[] = (await fetch(
+    `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json`
+  ).then((res) => res.json())) as Surah[]
   const suraName = suraJSON[sura - 1].name
 
   // Dynamic import for the selected tafseer
@@ -63,32 +65,39 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
 
       switch (selectedTab) {
         case 'katheer':
-          tafseerArray = (await import('@/data/tafaseer/katheer.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            '/mushaf-data/tafaseer/katheer.json'
+          ).then((res) => res.json())) as TafseerAya[]
           break
         case 'ma3any':
-          tafseerArray = (await import('@/data/tafaseer/ma3any.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/ma3any.json`
+          ).then((res) => res.json())) as TafseerAya[]
           break
         case 'baghawy':
-          tafseerArray = (await import('@/data/tafaseer/baghawy.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/baghawy.json`
+          ).then((res) => res.json())) as TafseerAya[]
           break
         case 'muyassar':
-          tafseerArray = (await import('@/data/tafaseer/muyassar.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/muyassar.json`
+          ).then((res) => res.json())) as TafseerAya[]
           break
         case 'qortoby':
-          tafseerArray = (await import('@/data/tafaseer/qortoby.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/qortoby.json`
+          ).then((res) => res.json())) as TafseerAya[]
           break
         case 'tabary':
-          tafseerArray = (await import('@/data/tafaseer/tabary.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/tabary.json`
+          ).then((res) => res.json())) as TafseerAya[]
           break
         case 'saady':
-          tafseerArray = (await import('@/data/tafaseer/saady.json'))
-            .default as TafseerAya[]
+          tafseerArray = (await fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/saady.json`
+          ).then((res) => res.json())) as TafseerAya[]
           break
       }
 

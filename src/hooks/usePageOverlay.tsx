@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import { coordinateElMadinaWarshAzrak } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/aya'
 import {
   defaultFirstPAgesMarginX,
   defaultFirstPagesMarginY,
@@ -24,7 +23,7 @@ type Props = {
   dimensions: { customPageWidth: number; customPageHeight: number }
 }
 
-const usePageOverlay = ({ index, dimensions }: Props) => {
+const usePageOverlay = async ({ index, dimensions }: Props) => {
   const [selectedAya, setSelectedAya] = useState<SelectedAya>({
     aya: 0,
     sura: 0,
@@ -66,7 +65,9 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
 
   let prevX = marginX
   let overlay: React.JSX.Element[] = []
-
+  const coordinateElMadinaWarshAzrak: Page[] = (await fetch(
+    `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/aya.json`
+  ).then((res) => res.json())) as Page[]
   const page: Page = coordinateElMadinaWarshAzrak[Number(index)]
 
   const handleAyaClick = ({ aya, sura }: { aya: number; sura: number }) => {
