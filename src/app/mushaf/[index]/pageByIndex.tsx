@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
@@ -18,15 +18,17 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
   const router = useRouter()
   const { index } = params
 
-  // Pages navigation limitation
-  if (Number(index) < 1) {
-    router.push('/mushaf/1')
-  }
+  useEffect(() => {
+    // Pages navigation limitation
+    if (Number(index) < 1) {
+      router.push('/mushaf/1')
+    }
 
-  if (Number(index) > defaultNumberOfPages) {
-    router.push(`/mushaf/${defaultNumberOfPages}`)
-  }
-  //
+    if (Number(index) > defaultNumberOfPages) {
+      router.push(`/mushaf/${defaultNumberOfPages}`)
+    }
+    //
+  }, [index, router])
 
   useHotkeys('ArrowLeft', () => {
     if (Number(index) >= defaultNumberOfPages) return

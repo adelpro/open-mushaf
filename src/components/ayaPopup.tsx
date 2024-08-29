@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 
+import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
-import { Surah } from '@/types'
 import { cn } from '@/utils/cn'
 
 import Spinner from './spinner'
@@ -39,7 +39,7 @@ const tabLabels: Record<Tabs, string> = {
   saady: 'السعدي',
 }
 
-export default async function AyaPopup({ show, setShow, aya, sura }: Props) {
+export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   const [popupHeight, setPopupHeight] = useLocalStorage<number>(
     'popupHeight',
     320
@@ -52,11 +52,7 @@ export default async function AyaPopup({ show, setShow, aya, sura }: Props) {
   const [tafseerData, setTafseerData] = useState<TafseerAya | null>(null)
   const [loading, setLoading] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
-  const suraJSON: Surah[] = (await fetch(
-    `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json`
-  ).then((res) => res.json())) as Surah[]
   const suraName = suraJSON[sura - 1].name
-
   // Dynamic import for the selected tafseer
   useEffect(() => {
     const loadTafseerData = async () => {
@@ -66,37 +62,37 @@ export default async function AyaPopup({ show, setShow, aya, sura }: Props) {
       switch (selectedTab) {
         case 'katheer':
           tafseerArray = (await fetch(
-            '/mushaf-data/tafaseer/katheer.json'
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/katheer.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
         case 'ma3any':
           tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/ma3any.json`
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/ma3any.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
         case 'baghawy':
           tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/baghawy.json`
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/baghawy.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
         case 'muyassar':
           tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/muyassar.json`
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/muyassar.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
         case 'qortoby':
           tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/qortoby.json`
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/qortoby.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
         case 'tabary':
           tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/tabary.json`
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/tabary.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
         case 'saady':
           tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/mushaf-data/tafaseer/saady.json`
+            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/saady.json`
           ).then((res) => res.json())) as TafseerAya[]
           break
       }
@@ -194,7 +190,7 @@ export default async function AyaPopup({ show, setShow, aya, sura }: Props) {
             role="tablist"
           >
             {Object.keys(tabLabels).map((key) => {
-              const tabKey = key as Tabs // Type assertion to Tabs
+              const tabKey = key as Tabs
               return (
                 <button
                   key={tabKey}
@@ -212,7 +208,7 @@ export default async function AyaPopup({ show, setShow, aya, sura }: Props) {
           </div>
 
           <Suspense fallback={<Spinner />}>
-            {loading ? <Spinner /> : renderTafseerContent(tafseerData?.text)}
+            {renderTafseerContent(tafseerData?.text)}
           </Suspense>
         </div>
       </div>
