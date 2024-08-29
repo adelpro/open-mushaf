@@ -67,18 +67,17 @@ const useDownloadAssetsOffline = () => {
     )
 
     const tafseerFiles = [
-      '/mushaf-data/tafaseer/katheer.json',
-      '/mushaf-data/tafaseer/ma3any.json',
-      '/mushaf-data/tafaseer/baghawy.json',
-      '/mushaf-data/tafaseer/muyassar.json',
-      '/mushaf-data/tafaseer/qortoby.json',
-      '/mushaf-data/tafaseer/tabary.json',
-      '/mushaf-data/tafaseer/saady.json',
+      '/tafaseer/katheer.json',
+      '/tafaseer/ma3any.json',
+      '/tafaseer/baghawy.json',
+      '/tafaseer/muyassar.json',
+      '/tafaseer/qortoby.json',
+      '/tafaseer/tabary.json',
+      '/tafaseer/saady.json',
     ]
 
     for (let i = 0; i < tafseerFiles.length; i++) {
       const url = tafseerFiles[i]
-      console.log('TafseerFile', url)
 
       if (cachedTafseerUrls.has(url)) {
         const cacheResponse = await tafseerCache.match(url)
