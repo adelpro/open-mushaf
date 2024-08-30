@@ -14,12 +14,15 @@ type Props = {
 
 const tabLabels: Record<Tabs, string> = {
   katheer: 'ابن كثير',
-  ma3any: 'معاني القرآن',
+  maaany: 'معاني القرآن',
+  earab: 'إعراب القرآن',
   baghawy: 'البغوي',
   muyassar: 'الميسر',
   qortoby: 'القرطبي',
   tabary: 'الطبري',
   saady: 'السعدي',
+  tanweer: 'التحرير و التنوير',
+  waseet: 'الوسيط',
 }
 
 export default function AyaPopup({ show, setShow, aya, sura }: Props) {
@@ -36,6 +39,7 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   const [loading, setLoading] = useState(false)
   const popupRef = useRef<HTMLDivElement>(null)
   const suraName = suraJSON[sura - 1].name
+
   // Dynamic import for the selected tafseer
   useEffect(() => {
     const loadTafseerData = async () => {
@@ -48,8 +52,13 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
             res.json()
           )) as TafseerAya[]
           break
-        case 'ma3any':
+        case 'maaany':
           tafseerArray = (await fetch('/tafaseer/maany.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
+          break
+        case 'earab':
+          tafseerArray = (await fetch('/tafaseer/earab.json').then((res) =>
             res.json()
           )) as TafseerAya[]
           break
@@ -78,6 +87,22 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
             res.json()
           )) as TafseerAya[]
           break
+
+        case 'tanweer':
+          tafseerArray = (await fetch('/tafaseer/tanweer.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
+          break
+        case 'waseet':
+          tafseerArray = (await fetch('/tafaseer/waseet.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
+          break
+
+        default:
+          tafseerArray = (await fetch('/tafaseer/katheer.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
       }
 
       setTafseerData(

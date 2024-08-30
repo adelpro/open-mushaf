@@ -1,8 +1,11 @@
 export type Tabs =
   | 'katheer'
-  | 'ma3any'
+  | 'maaany'
+  | 'earab'
   | 'baghawy'
   | 'muyassar'
   | 'qortoby'
   | 'tabary'
   | 'saady'
+  | 'tanweer'
+  | 'waseet'
