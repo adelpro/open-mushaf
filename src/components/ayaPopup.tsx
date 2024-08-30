@@ -1,10 +1,9 @@
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { Tabs, TafseerAya } from '@/types'
 import { cn } from '@/utils/cn'
-
-import Spinner from './spinner'
 
 type Props = {
   show: boolean
@@ -12,22 +11,6 @@ type Props = {
   aya: number
   sura: number
 }
-
-type TafseerAya = {
-  id: number
-  sura: number
-  aya: number
-  text: string
-}
-
-type Tabs =
-  | 'katheer'
-  | 'ma3any'
-  | 'baghawy'
-  | 'muyassar'
-  | 'qortoby'
-  | 'tabary'
-  | 'saady'
 
 const tabLabels: Record<Tabs, string> = {
   katheer: 'ابن كثير',
@@ -207,9 +190,13 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
             })}
           </div>
 
-          <Suspense fallback={<Spinner />}>
-            {renderTafseerContent(tafseerData?.text)}
-          </Suspense>
+          <div>
+            {loading ? (
+              <div> جاري التحميل...</div>
+            ) : (
+              renderTafseerContent(tafseerData?.text)
+            )}
+          </div>
         </div>
       </div>
     </div>
