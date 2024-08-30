@@ -160,6 +160,7 @@ const pwaConfig = {
   register: true,
   skipWaiting: true,
   clientsClaim: true,
+  cacheStartUrl: true,
   maximumFileSizeToCacheInBytes: 100 * 1024 * 1024, // 100MB
   // for more information: https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
   // Must be false to precache the home page url ('/')
