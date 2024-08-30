@@ -1,18 +1,10 @@
 import React, { useState } from 'react'
 
-import { coordinateElMadinaWarshAzrak } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/aya'
-import {
-  defaultFirstPAgesMarginX,
-  defaultFirstPagesMarginY,
-  defaultFirstPagesWidth,
-  defaultLineHeight,
-  defaultMarginX,
-  defaultMarginY,
-  defaultPageHeight,
-  defaultPageWidth,
-} from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
 import { Aya, Page } from '@/types'
 import { getDimensionCoeff } from '@/utils/getDimensionCoeff'
+
+import { useCoordinates } from './useCoordinates'
+import { useSpecs } from './useSpecs'
 
 type SelectedAya = {
   aya: number
@@ -25,12 +17,25 @@ type Props = {
 }
 
 const usePageOverlay = ({ index, dimensions }: Props) => {
+  const { coordinates: coordinateElMadinaWarshAzrak } = useCoordinates()
   const [selectedAya, setSelectedAya] = useState<SelectedAya>({
     aya: 0,
     sura: 0,
   })
   const [show, setShow] = useState<boolean>(false)
   const { customPageHeight, customPageWidth } = dimensions
+  const {
+    specs: {
+      defaultPageHeight,
+      defaultPageWidth,
+      defaultMarginX,
+      defaultMarginY,
+      defaultLineHeight,
+      defaultFirstPAgesMarginX,
+      defaultFirstPagesWidth,
+      defaultFirstPagesMarginY,
+    },
+  } = useSpecs()
 
   const heightCoeff = getDimensionCoeff({
     defaultDimension: defaultPageHeight,
@@ -109,75 +114,80 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
     )
   }
 
-  page.map((aya: Aya) => {
-    const defaultX: number = aya[2]
-    const defaultY: number = aya[3]
+  page &&
+    page.map((aya: Aya) => {
+      const defaultX: number = aya[2]
+      const defaultY: number = aya[3]
 
-    // Dimensions correction
-    let X = defaultX * heightCoeff
+      // Dimensions correction
+      let X = defaultX * heightCoeff
 
-    // Correction for 1/2 pages only
-    if (index <= 2) {
-      X = (defaultX - 100) * heightCoeff
-    }
-    const Y = defaultY * widthCoeff
+      // Correction for 1/2 pages only
+      if (index <= 2) {
+        X = (defaultX - 100) * heightCoeff
+      }
+      const Y = defaultY * widthCoeff
 
-    // Drawing overlay for aya line (first part before the aya marker)
-    overlay.push(
-      renderOverlayDiv(
-        X,
-        Y - marginY,
-        pageWidth + marginY - Y,
-        aya[1],
-        aya[0],
-        show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
-          ? 'rgba(128, 128, 128, 0.5)'
-          : 'transparent'
-      )
-    )
-
-    // Drawing overlay for aya line (last part after the aya marker in the same line)
-    if (Y > 93) {
+      // Drawing overlay for aya line (first part before the aya marker)
       overlay.push(
         renderOverlayDiv(
           X,
-          marginY,
-          Y - marginY * 2,
-          aya[1] + 1,
+          Y - marginY,
+          pageWidth + marginY - Y,
+          aya[1],
           aya[0],
-          show && selectedAya.aya === aya[1] + 1 && selectedAya.sura === aya[0]
+          show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
             ? 'rgba(128, 128, 128, 0.5)'
             : 'transparent'
         )
       )
-    }
 
-    // Drawing overlay for multiple-line aya
-    const numberOfLines: number = Math.ceil((X - prevX) / lineHeight)
-
-    if (numberOfLines > 1) {
-      let x = X
-      for (let i = 0; i < numberOfLines - 1; i++) {
-        x -= lineHeight
-        if (x >= 40 && selectedAya.aya !== 1) {
-          overlay.push(
-            renderOverlayDiv(
-              x,
-              marginY,
-              pageWidth - marginY,
-              aya[1],
-              aya[0],
-              show && selectedAya.aya === aya[1] && selectedAya.sura === aya[0]
-                ? 'rgba(128, 128, 128, 0.5)'
-                : 'transparent'
-            )
+      // Drawing overlay for aya line (last part after the aya marker in the same line)
+      if (Y > 93) {
+        overlay.push(
+          renderOverlayDiv(
+            X,
+            marginY,
+            Y - marginY * 2,
+            aya[1] + 1,
+            aya[0],
+            show &&
+              selectedAya.aya === aya[1] + 1 &&
+              selectedAya.sura === aya[0]
+              ? 'rgba(128, 128, 128, 0.5)'
+              : 'transparent'
           )
+        )
+      }
+
+      // Drawing overlay for multiple-line aya
+      const numberOfLines: number = Math.ceil((X - prevX) / lineHeight)
+
+      if (numberOfLines > 1) {
+        let x = X
+        for (let i = 0; i < numberOfLines - 1; i++) {
+          x -= lineHeight
+          if (x >= 40 && selectedAya.aya !== 1) {
+            overlay.push(
+              renderOverlayDiv(
+                x,
+                marginY,
+                pageWidth - marginY,
+                aya[1],
+                aya[0],
+                show &&
+                  selectedAya.aya === aya[1] &&
+                  selectedAya.sura === aya[0]
+                  ? 'rgba(128, 128, 128, 0.5)'
+                  : 'transparent'
+              )
+            )
+          }
         }
       }
-    }
 
-    prevX = X
-  })
+      prevX = X
+    })
 
   return { overlay, show, setShow, selectedAya }
 }

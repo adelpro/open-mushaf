@@ -7,3 +7,5 @@ export * from './aya'
 export * from './tabs'
 
 export * from './tafseerAya'
+
+export * from './specs'

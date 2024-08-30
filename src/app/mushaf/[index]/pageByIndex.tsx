@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 import Skeleton from '@/components/skeleton'
-import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+import { useSpecs } from '@/hooks/useSpecs'
 
 const MushafPage = dynamic(() => import('@/components/mushafPage'), {
   suspense: true,
@@ -17,7 +17,9 @@ const MushafPage = dynamic(() => import('@/components/mushafPage'), {
 export default function PageByIndex({ params }: { params: { index: string } }) {
   const router = useRouter()
   const { index } = params
-
+  const {
+    specs: { defaultNumberOfPages },
+  } = useSpecs()
   useEffect(() => {
     // Pages navigation limitation
     if (Number(index) < 1) {
@@ -28,7 +30,7 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
       router.push(`/mushaf/${defaultNumberOfPages}`)
     }
     //
-  }, [index, router])
+  }, [defaultNumberOfPages, index, router])
 
   useHotkeys('ArrowLeft', () => {
     if (Number(index) >= defaultNumberOfPages) return

@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
 import { Tabs } from '@/types'
+
+import { useSpecs } from './useSpecs'
 
 const tafseerFilesMap: Record<Tabs, string> = {
   katheer: '/tafaseer/katheer.json',
@@ -20,6 +21,9 @@ const tafseerFilesMap: Record<Tabs, string> = {
   waseet: '/tafaseer/waseet.json',
 }
 const useDownloadAssetsOffline = () => {
+  const {
+    specs: { defaultNumberOfPages },
+  } = useSpecs()
   const router = useRouter()
   const [status, setStatus] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
@@ -28,7 +32,7 @@ const useDownloadAssetsOffline = () => {
   )
   useEffect(() => {
     setTotal(() => Object.keys(tafseerFilesMap).length + defaultNumberOfPages)
-  }, [])
+  }, [defaultNumberOfPages])
   const downloadAssets = async () => {
     const CACHE_MUSHAF_NAME = 'mushaf-elmadina-warsh-azrak-cache'
     const CACHE_TAFSEER_NAME = 'tafaseer-cache'

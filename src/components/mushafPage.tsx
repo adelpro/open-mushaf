@@ -5,12 +5,9 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 import { bookBase64 as placeHolder } from '@/asset/bookBase64'
-import {
-  defaultPageHeight,
-  defaultPageWidth,
-} from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import usePageOverlay from '@/hooks/usePageOverlay'
+import { useSpecs } from '@/hooks/useSpecs'
 import useSwipe from '@/hooks/useSwipe'
 import { cn } from '@/utils/cn'
 
@@ -23,10 +20,14 @@ type Props = {
 
 export default function MushafPage({ index }: Props) {
   const router = useRouter()
+  const {
+    specs: { defaultPageWidth, defaultPageHeight },
+  } = useSpecs()
   const swipeHandlers = useSwipe({
     onSwipedLeft: () => router.push(`/mushaf/${Number(index) - 1}`),
     onSwipedRight: () => router.push(`/mushaf/${Number(index) + 1}`),
   })
+
   const pageImageRef = useRef<HTMLImageElement>(null)
   const [mushafPage, setMushafPage] = useState<{
     width: number
@@ -49,7 +50,7 @@ export default function MushafPage({ index }: Props) {
       width: pageImageRef.current?.width || defaultPageWidth,
       height: pageImageRef.current?.height || defaultPageHeight,
     })
-  }, [])
+  }, [defaultPageHeight, defaultPageWidth])
   return (
     <div
       className="relative flex flex-col justify-center items-center w-full max-w-md insert-0 h-dvh overflow-hidden"
