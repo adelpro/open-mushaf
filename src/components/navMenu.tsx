@@ -60,7 +60,7 @@ export default function NavMenu() {
           </li>
           <li>
             <Link
-              href="/surahs"
+              href="/suras"
               className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
               onClick={() => setIsOpen(false)}
             >

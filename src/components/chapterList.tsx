@@ -1,10 +1,12 @@
 import { Chapter } from '@/types'
 
 import ChapterCard from './chapterCard'
-export default async function ChapterList() {
-  const chapterdata: Chapter[] = (await fetch(
-    '/quran-metadata/mushaf-elmadina-warsh-azrak/chapter.json'
-  ).then((res) => res.json())) as Chapter[]
+
+type Props = {
+  data: Chapter[]
+}
+export default function ChapterList({ data }: Props) {
+  const chapterdata = data
 
   return (
     <>

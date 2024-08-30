@@ -1,12 +1,9 @@
+import SuraList from '@/components/suraList'
 import { Sura } from '@/types'
 
-import Home from './home'
-
-export const metadata = generateMetadata()
-
-function generateMetadata() {
-  const title = 'Open-Mushaf'
-  const description = 'المحف المفتوح المصدر'
+export async function generateMetadata() {
+  const title = 'Open-Mushaf - Suras'
+  const description = 'قائمة السور'
   const openGraph = {
     title,
     description,
@@ -20,8 +17,12 @@ function generateMetadata() {
 }
 export default async function Page() {
   const url = `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json`
-  const data: Sura[] = (await fetch(url, {
+  const surasData: Sura[] = (await fetch(url, {
     cache: 'force-cache',
   }).then((res) => res.json())) as Sura[]
-  return <Home data={data} />
+  return (
+    <div className="container m-2">
+      <SuraList data={surasData} />
+    </div>
+  )
 }

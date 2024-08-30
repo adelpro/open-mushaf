@@ -3,10 +3,14 @@ import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import SurahList from '@/components/surahList'
+import SuraList from '@/components/suraList'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { Sura } from '@/types'
 
-export default function Home() {
+type Props = {
+  data: Sura[]
+}
+export default function Home({ data }: Props) {
   const [index, _] = useLocalStorage<string>('index', '1')
   const router = useRouter()
   const [showSurahList, setShowSurahList] = useState(false)
@@ -21,6 +25,8 @@ export default function Home() {
   }, [index, router])
 
   return (
-    <main className="h-dvh m-2">{showSurahList ? <SurahList /> : <></>}</main>
+    <main className="h-dvh m-2">
+      {showSurahList ? <SuraList data={data} /> : <></>}
+    </main>
   )
 }

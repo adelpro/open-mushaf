@@ -1,4 +1,4 @@
-export * from './surah'
+export * from './sura'
 
 export * from './chapter'
 
