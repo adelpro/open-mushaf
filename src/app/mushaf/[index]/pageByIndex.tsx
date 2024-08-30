@@ -21,13 +21,19 @@ export default function PageByIndex({ params }: { params: { index: string } }) {
     specs: { defaultNumberOfPages },
   } = useSpecs()
   useEffect(() => {
+    // Check if the index is valid number
+    if (Number.isNaN(Number(index))) {
+      return router.replace('/mushaf/1')
+    }
+  }, [index, router])
+  useEffect(() => {
     // Pages navigation limitation
     if (Number(index) < 1) {
-      router.push('/mushaf/1')
+      router.replace('/mushaf/1')
     }
 
     if (Number(index) > defaultNumberOfPages) {
-      router.push(`/mushaf/${defaultNumberOfPages}`)
+      router.replace(`/mushaf/${defaultNumberOfPages}`)
     }
     //
   }, [defaultNumberOfPages, index, router])

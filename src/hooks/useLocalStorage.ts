@@ -7,9 +7,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
     try {
       const item = window.localStorage.getItem(key)
       setStoredValue(item ? (JSON.parse(item) as T) : initialValue)
-    } catch (error) {
-      console.log(error)
-    }
+    } catch {}
   }, [key, initialValue])
 
   const setValue = (value: T | ((val: T) => T)) => {

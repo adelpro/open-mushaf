@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Aya, Page } from '@/types'
+import { Aya } from '@/types'
 import { getDimensionCoeff } from '@/utils/getDimensionCoeff'
 
 import { useCoordinates } from './useCoordinates'
@@ -17,7 +17,8 @@ type Props = {
 }
 
 const usePageOverlay = ({ index, dimensions }: Props) => {
-  const { coordinates: coordinateElMadinaWarshAzrak } = useCoordinates()
+  const { page } = useCoordinates(index)
+
   const [selectedAya, setSelectedAya] = useState<SelectedAya>({
     aya: 0,
     sura: 0,
@@ -71,8 +72,6 @@ const usePageOverlay = ({ index, dimensions }: Props) => {
 
   let prevX = marginX
   let overlay: React.JSX.Element[] = []
-
-  const page: Page = coordinateElMadinaWarshAzrak[Number(index)]
 
   const handleAyaClick = ({ aya, sura }: { aya: number; sura: number }) => {
     setSelectedAya({ aya, sura })
