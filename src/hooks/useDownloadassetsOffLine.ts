@@ -1,17 +1,34 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
 import { defaultNumberOfPages } from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/spec'
+import { Tabs } from '@/types'
 
+const tafseerFilesMap: Record<Tabs, string> = {
+  katheer: '/tafaseer/katheer.json',
+  maaany: '/tafaseer/maany.json',
+  earab: '/tafaseer/earab.json',
+  baghawy: '/tafaseer/baghawy.json',
+  muyassar: '/tafaseer/muyassar.json',
+  qortoby: '/tafaseer/qortoby.json',
+  tabary: '/tafaseer/tabary.json',
+  saady: '/tafaseer/saady.json',
+  tanweer: '/tafaseer/tanweer.json',
+  waseet: '/tafaseer/waseet.json',
+}
 const useDownloadAssetsOffline = () => {
   const router = useRouter()
   const [status, setStatus] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
-  const total = defaultNumberOfPages + 7 // Including Tafseer files
-
+  const [total, setTotal] = useState(
+    () => Object.keys(tafseerFilesMap).length + defaultNumberOfPages
+  )
+  useEffect(() => {
+    setTotal(() => Object.keys(tafseerFilesMap).length + defaultNumberOfPages)
+  }, [])
   const downloadAssets = async () => {
     const CACHE_MUSHAF_NAME = 'mushaf-elmadina-warsh-azrak-cache'
     const CACHE_TAFSEER_NAME = 'tafaseer-cache'
@@ -53,10 +70,10 @@ const useDownloadAssetsOffline = () => {
           setProgress(progressCount)
           setStatus(`تحميل الصورة (${progressCount}/${total})...`)
         } else {
-          console.error(`فشل في تحميل ${url}: ${response.statusText}`)
+          setStatus(`فشل في تحميل ${url}: ${response.statusText}`)
         }
       } catch {
-        console.error(`Error downloading ${url}`)
+        setStatus(`خطأ في تحميل ${url}`)
       }
     }
 
@@ -66,18 +83,8 @@ const useDownloadAssetsOffline = () => {
       (await tafseerCache.keys()).map((request) => request.url)
     )
 
-    const tafseerFiles = [
-      '/tafaseer/katheer.json',
-      '/tafaseer/ma3any.json',
-      '/tafaseer/baghawy.json',
-      '/tafaseer/muyassar.json',
-      '/tafaseer/qortoby.json',
-      '/tafaseer/tabary.json',
-      '/tafaseer/saady.json',
-    ]
-
-    for (let i = 0; i < tafseerFiles.length; i++) {
-      const url = tafseerFiles[i]
+    for (const tab of Object.keys(tafseerFilesMap) as Tabs[]) {
+      const url = tafseerFilesMap[tab]
 
       if (cachedTafseerUrls.has(url)) {
         const cacheResponse = await tafseerCache.match(url)
@@ -102,10 +109,10 @@ const useDownloadAssetsOffline = () => {
           setProgress(progressCount)
           setStatus(`تحميل الملف (${progressCount}/${total})...`)
         } else {
-          console.error(`فشل في تحميل ${url}: ${response.statusText}`)
+          setStatus(`فشل في تحميل ${url}: ${response.statusText}`)
         }
       } catch {
-        console.error(`Error downloading ${url}`)
+        setStatus(`خطأ في تحميل ${url}`)
       }
     }
 
