@@ -44,39 +44,39 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
 
       switch (selectedTab) {
         case 'katheer':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/katheer.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('/tafaseer/katheer.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
         case 'ma3any':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/ma3any.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('tafaseer/ma3any.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
         case 'baghawy':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/baghawy.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('/tafaseer/baghawy.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
         case 'muyassar':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/muyassar.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('/tafaseer/muyassar.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
         case 'qortoby':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/qortoby.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('/tafaseer/qortoby.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
         case 'tabary':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/tabary.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('/tafaseer/tabary.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
         case 'saady':
-          tafseerArray = (await fetch(
-            `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/tafaseer/saady.json`
-          ).then((res) => res.json())) as TafseerAya[]
+          tafseerArray = (await fetch('/tafaseer/saady.json').then((res) =>
+            res.json()
+          )) as TafseerAya[]
           break
       }
 

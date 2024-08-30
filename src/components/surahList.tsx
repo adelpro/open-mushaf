@@ -3,7 +3,7 @@ import { Surah } from '@/types'
 import SurahCard from './surahCard'
 export default async function SurahList() {
   const surahdata: Surah[] = (await fetch(
-    `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json`
+    '/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
   ).then((res) => res.json())) as Surah[]
   return (
     <div
