@@ -68,7 +68,7 @@ const useDownloadAssetsOffline = () => {
           await mushafCache.put(url, response)
           progressCount++
           setProgress(progressCount)
-          setStatus(`تحميل الصورة (${progressCount}/${total})...`)
+          setStatus(`تحميل الصور (${progressCount}/${total})...`)
         } else {
           setStatus(`فشل في تحميل ${url}: ${response.statusText}`)
         }
@@ -107,7 +107,7 @@ const useDownloadAssetsOffline = () => {
           await tafseerCache.put(url, response)
           progressCount++
           setProgress(progressCount)
-          setStatus(`تحميل الملف (${progressCount}/${total})...`)
+          setStatus(`تحميل التفاسير (${progressCount}/${total})...`)
         } else {
           setStatus(`فشل في تحميل ${url}: ${response.statusText}`)
         }
