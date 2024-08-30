@@ -49,7 +49,7 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
           )) as TafseerAya[]
           break
         case 'ma3any':
-          tafseerArray = (await fetch('tafaseer/ma3any.json').then((res) =>
+          tafseerArray = (await fetch('/tafaseer/maany.json').then((res) =>
             res.json()
           )) as TafseerAya[]
           break

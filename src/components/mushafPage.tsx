@@ -35,8 +35,6 @@ export default function MushafPage({ index }: Props) {
 
   const [_, setIndex] = useLocalStorage<Number>('index', 1)
 
-  //TODO add custom width and height from mushafPage state
-
   const dimensions = {
     customPageWidth: mushafPage.width,
     customPageHeight: mushafPage.height,
