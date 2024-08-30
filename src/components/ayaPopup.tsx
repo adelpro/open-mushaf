@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import suraJSON from '@/data/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { Tabs, TafseerAya } from '@/types'
 import { cn } from '@/utils/cn'
@@ -37,9 +36,22 @@ export default function AyaPopup({ show, setShow, aya, sura }: Props) {
   )
   const [tafseerData, setTafseerData] = useState<TafseerAya | null>(null)
   const [loading, setLoading] = useState(false)
+  const [suraName, setSuraName] = useState<string>('')
   const popupRef = useRef<HTMLDivElement>(null)
-  const suraName = suraJSON[sura - 1].name
 
+  // Fetch suraJSON from public folder
+  useEffect(() => {
+    const loadSuraJSON = async () => {
+      const url = `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json`
+      const res = await fetch(url, {
+        cache: 'force-cache',
+      })
+      const suraJSON = await res.json()
+      setSuraName(suraJSON[sura - 1].name)
+    }
+
+    loadSuraJSON()
+  }, [sura])
   // Dynamic import for the selected tafseer
   useEffect(() => {
     const loadTafseerData = async () => {
