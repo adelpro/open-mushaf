@@ -1,12 +1,29 @@
+'use client'
+import { useEffect, useState } from 'react'
+
 import { Chapter } from '@/types'
 
 import ChapterCard from './chapterCard'
 
-type Props = {
-  data: Chapter[]
-}
-export default function ChapterList({ data }: Props) {
-  const chapterdata = data
+export default function ChapterList() {
+  const [chaptersData, setChaptersData] = useState<Chapter[]>([])
+  useEffect(() => {
+    const loadChapters = async () => {
+      try {
+        const url = `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/chapter.json`
+        const response = await fetch(url, {
+          cache: 'force-cache',
+        })
+        if (!response.ok) {
+          throw new Error('Failed to load specs')
+        }
+        const data: Chapter[] = await response.json()
+        setChaptersData(data)
+      } catch {}
+    }
+
+    loadChapters()
+  }, [])
 
   return (
     <>
@@ -15,7 +32,7 @@ export default function ChapterList({ data }: Props) {
         grid-flow-col-reverse
         `}
       >
-        {chapterdata.map((chapter: Chapter) => (
+        {chaptersData.map((chapter: Chapter) => (
           <ChapterCard key={chapter.number} chapter={chapter} />
         ))}
       </div>

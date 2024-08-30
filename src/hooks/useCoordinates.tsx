@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { Aya } from '@/types'
+import { Aya, Page } from '@/types'
 
-type Coordinate = [number, number, number, number] // [sura, aya, x, y]
-type Page = Coordinate[]
-type Coordinates = Page[]
 export function useCoordinates(index: number) {
-  const [coordinates, setCoordinates] = useState<Coordinates>([])
+  const [coordinates, setCoordinates] = useState<Page[]>([])
   const [page, setPage] = useState<Aya[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -18,14 +15,13 @@ export function useCoordinates(index: number) {
         const data = (await fetch(url, {
           cache: 'force-cache',
         }).then((response) => response.json())) as {
-          coordinates: Coordinates
+          coordinates: Page[]
         }
         setCoordinates(data?.coordinates || [])
 
         setPage(data.coordinates[index] || [])
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
-        // Keep using default coordinates in case of error
       } finally {
         setLoading(false)
       }

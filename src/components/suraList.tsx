@@ -1,12 +1,30 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
 import { Sura } from '@/types'
 
 import SuraCard from './suraCard'
 
-type Props = {
-  data: Sura[]
-}
-export default function SuraList({ data }: Props) {
-  const suradata = data
+export default function SuraList() {
+  const [surasData, setSurasData] = useState<Sura[]>([])
+  useEffect(() => {
+    const loadSuras = async () => {
+      try {
+        const url = `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/quran-metadata/mushaf-elmadina-warsh-azrak/sura.json`
+        const response = await fetch(url, {
+          cache: 'force-cache',
+        })
+        if (!response.ok) {
+          throw new Error('Failed to load specs')
+        }
+        const data: Sura[] = await response.json()
+        setSurasData(data)
+      } catch {}
+    }
+
+    loadSuras()
+  }, [])
 
   return (
     <div
@@ -14,7 +32,7 @@ export default function SuraList({ data }: Props) {
         grid-flow-col-reverse
         `}
     >
-      {suradata.map((sura: Sura) => (
+      {surasData.map((sura: Sura) => (
         <SuraCard key={sura.number} sura={sura} />
       ))}
     </div>
