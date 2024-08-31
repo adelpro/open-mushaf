@@ -1,9 +1,8 @@
 import withBundleAnalyzer from '@next/bundle-analyzer'
-import withPWA from 'next-pwa'
-
+import withSerwistInit from '@serwist/next'
 /** @type {import('next').NextConfig} */
 
-const config = {
+const nextConfig = {
   productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
@@ -52,131 +51,17 @@ const config = {
       process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
   },
 }
-// Runtime Caching rules
-const runtimeCaching = [
-  //Cache Mushaf images
-  {
-    urlPattern: '/mushaf-data/mushaf-elmadina-warsh-azrak/**',
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'mushaf-images',
-      expiration: {
-        maxEntries: 604,
-        maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
-        purgeOnQuotaError: false, // Prevent automatic purge
-      },
-      cacheableResponse: {
-        statuses: [0, 200],
-      },
-    },
-  },
-  // Cache tafasseer json
-  {
-    urlPattern: '/mushaf-data/tafasseer/**',
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'tafasseer-jsons',
-      expiration: {
-        maxEntries: 20,
-        maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
-        purgeOnQuotaError: false, // Prevent automatic purge
-      },
-      cacheableResponse: {
-        statuses: [0, 200],
-      },
-    },
-  },
 
-  // https request caching
-  {
-    urlPattern: /^https?.*/,
-    handler: 'NetworkFirst',
-    options: {
-      cacheName: 'https-calls',
-      expiration: {
-        maxAgeSeconds: 60 * 60 * 24 * 7,
-        // 7 days.
-        purgeOnQuotaError: true, // Automatically delete the cache if the quota is exceeded.
-      },
-      cacheableResponse: {
-        statuses: [0, 200], // Only cache response with status 0 and 200 ( 0 : opaque response with don't reveal its origin, 200: successfully origin )
-      },
-    },
-  },
-  // Images caching
-  {
-    urlPattern: /\.(jpe?g|png|gif|webp)$/i,
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'static-image-assets',
-      expiration: {
-        maxEntries: 700,
-        maxAgeSeconds: 60 * 60 * 24 * 30,
-        // 30 days.
-        purgeOnQuotaError: true,
-      },
-      cacheableResponse: {
-        statuses: [0, 200],
-      },
-    },
-  },
-  // js,css caching
-  {
-    urlPattern: /\.(js|css)$/i,
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'static-assets',
-      expiration: {
-        maxEntries: 200,
-        maxAgeSeconds: 60 * 60 * 24 * 90,
-        // 90 days
-        purgeOnQuotaError: true,
-      },
-      cacheableResponse: {
-        statuses: [0, 200],
-      },
-    },
-  },
-  // Google fonts caching
-  {
-    urlPattern: /^https?:\/\/fonts\.googleapis\.com\/.*/,
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'google-fonts',
-      expiration: {
-        maxAgeSeconds: 60 * 60 * 24 * 90,
-        // 90 days
-        purgeOnQuotaError: true,
-      },
-      cacheableResponse: {
-        statuses: [0, 200],
-      },
-    },
-  },
-]
 const pwaConfig = {
-  dest: 'public',
+  swSrc: 'src/sw.ts',
+  swDest: 'public/sw.js',
+  cacheOnNavigation: true,
   disable: process.env.NODE_ENV !== 'production',
   register: true,
-  skipWaiting: true,
-  clientsClaim: true,
-  cacheStartUrl: true,
   maximumFileSizeToCacheInBytes: 100 * 1024 * 1024, // 100MB
-  // for more information: https://developer.mozilla.org/en-US/docs/Web/API/Clients/claim
-  // Must be false to precache the home page url ('/')
-  dynamicStartUrl: false,
-
-  //buildExcludes: [/middleware-manifest.json$/],
-  //cacheStartUrl: true,
-  //cacheOnFrontEndNav: true,
-  runtimeCaching,
-  /*   fallbacks: {
-    // Failed page requests fallback to this.
-    document: '/offline',
-    // This is for images.
-    image: '/offline.svg',
-  }, */
 }
+
+const withSerwist = withSerwistInit(pwaConfig)
 
 /* How this will work
 
@@ -189,4 +74,4 @@ const pwaConfig = {
 */
 export default withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-})(withPWA(pwaConfig)(config))
+})(withSerwist(nextConfig))
