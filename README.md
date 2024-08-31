@@ -4,7 +4,6 @@
 ![Forks](https://img.shields.io/github/forks/adelpro/open-mushaf)
 
 ![Version](https://img.shields.io/github/package-json/v/adelpro/open-mushaf)
-![License](https://img.shields.io/github/license/adelpro/open-mushaf/LICENSE)
 ![Contributors](https://img.shields.io/github/contributors/adelpro/open-mushaf)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4f1c6df6499640b6be996ccf7a98cd9f)](https://app.codacy.com/gh/adelpro/open-mushaf/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
@@ -21,6 +20,7 @@ An open-source implementation of the Quran mushaf in [TypeScript](https://www.ty
 - All mushaf pages are from [the Quran Complex of King Fehd](https://qurancomplex.gov.sa/techquran/dev/).
 - Database (JSON) is from [Mushaf-mauri](https://github.com/Zizwar/mushaf-mauri).
 - Tafaseer data is from [Ayat](https://quran.ksu.edu.sa/ayat).
+- Icon from [SVGRepo](https://www.svgrepo.com/)
 
 ## Features
 
@@ -32,17 +32,15 @@ An open-source implementation of the Quran mushaf in [TypeScript](https://www.ty
 
 ## Screenshots
 
-![Mushaf Page](/public/screenshots/mushaf-page.png)
+![Mushaf Page Desktop](/public/screenshots/mushaf-page-desktop.png)
 
-![Tafseer Popup](/public/screenshots/tafseer-popup.png)
+![Mushaf Page Mobile](/public/screenshots/mushaf-page-mobile.png)
+
+![Tafseer Popup Mobile](/public/screenshots/tafseer-popup-mobile.png)
 
 ![Sura Index Mobile](/public/screenshots/sura-index-mobile.png)
 
 ![Sura Index Desktop](/public/screenshots/sura-index-desktop.png)
-
-![Juz Index Mobile](/public/screenshots/juz-index-mobile.png)
-
-![Juz Index Desktop](/public/screenshots/juz-index-desktop.png)
 
 ## Installation
 

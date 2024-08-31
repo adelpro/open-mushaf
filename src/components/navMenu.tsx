@@ -24,8 +24,8 @@ export default function NavMenu() {
 
       {/* Overlay */}
       <div
-        className={cn('absolute hidden bg-gray-800 opacity-50', {
-          'block inset-0': isOpen,
+        className={cn('fixed hidden bg-gray-800 opacity-50', {
+          'block inset-0 h-full': isOpen,
         })}
         onClick={() => setIsOpen(false)}
         onKeyDown={(e) => {
