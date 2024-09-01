@@ -17,9 +17,9 @@ export async function generateMetadata() {
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-50 text-gray-800">
+    <div className="flex flex-col items-center min-h-screen bg-gray-50 text-gray-800 m-2 md:m-8">
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-b from-blue-50 to-gray-50 p-8 text-center">
+      <section className="w-full bg-gradient-to-b from-blue-50 to-gray-50 p-2  text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-12">
           حول الموقع
         </h1>
@@ -36,7 +36,7 @@ export default function AboutPage() {
       </section>
 
       {/* Main Content */}
-      <main className="w-full max-w-3xl mx-auto p-8">
+      <main className="w-full max-w-3xl mx-auto p-2">
         <div className="bg-white shadow-lg rounded-lg p-6 md:p-8">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
             المصادر
