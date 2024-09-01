@@ -37,6 +37,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    // minimumCacheTTL: 1000 * 60 * 60 * 24 * 7,
   },
   typescript: {
     // Set this to false if you want production builds to abort if there's type errors

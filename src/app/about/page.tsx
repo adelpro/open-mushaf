@@ -94,16 +94,20 @@ export default function AboutPage() {
       </main>
 
       {/* Footer Section */}
-      <footer className="w-full py-6 mt-12 text-center">
-        <hr className="border-t border-gray-300 mb-4" />
-        <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+      <footer className="w-full py-10 mt-12 text-center bg-gray-50">
+        <hr className="border-t border-gray-400 mb-6" />
+        <p className="text-lg md:text-xl leading-relaxed text-gray-800">
           من برمجة وتصميم{' '}
           <Link
             href="https://github.com/adelpro"
-            className="text-blue-600 hover:underline"
+            className="text-blue-700 hover:text-blue-900 underline transition duration-200 ease-in-out"
+            aria-label="Visit AdelPro on GitHub"
           >
             adelpro
           </Link>
+        </p>
+        <p className="text-sm text-gray-600 mt-4">
+          © {new Date().getFullYear()} Open-Mushaf. جميع الحقوق محفوظة.
         </p>
       </footer>
     </div>
