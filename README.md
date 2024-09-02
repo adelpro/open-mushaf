@@ -13,7 +13,7 @@
 
 ## About
 
-An open-source implementation of the Quran mushaf in [TypeScript](https://www.typescriptlang.org/) using [Next.js](https://nextjs.org/), [next-pwa](https://www.npmjs.com/package/next-pwa), and [TailwindCSS](https://tailwindcss.com/).
+An open-source implementation of the Quran mushaf in [TypeScript](https://www.typescriptlang.org/) using [Next.js](https://nextjs.org/), [serwist](https://github.com/serwist/serwist), and [TailwindCSS](https://tailwindcss.com/).
 
 ## Resources
 
