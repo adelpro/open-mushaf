@@ -10,7 +10,7 @@ export default function Skeleton() {
       aria-busy="true"
       className="w-full h-screen flex justify-center items-center"
     >
-      <Image src={spinner} height={150} width={150} alt="loading" />
+      <Image src={spinner} height={100} width={100} alt="loading" />
     </div>
   )
 }

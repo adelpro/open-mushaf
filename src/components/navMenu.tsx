@@ -6,9 +6,13 @@ import Link from 'next/link'
 import useLocalStorage from '@/hooks/useLocalStorage'
 import { cn } from '@/utils/cn'
 
+// eslint-disable-next-line prettier/prettier
 import NavButton from './navButton'
+// eslint-disable-next-line prettier/prettier
+import packageJson from '../../package.json'
 
 export default function NavMenu() {
+  console.log('packageJson', packageJson.version)
   const [isOpen, setIsOpen] = useState(false)
   const [index, _] = useLocalStorage<string>('index', '1')
   const toggleMenu = () => {
@@ -108,7 +112,7 @@ export default function NavMenu() {
           </li> */}
         </ul>
         <span className="fixed bottom-0 right-0 p-2 bg-gray-700 text-sm text-gray-400 rounded-tl-md shadow-lg z-30">
-          الإصدار: {appVersion}
+          الإصدار: {packageJson.version}
         </span>
       </nav>
     </div>

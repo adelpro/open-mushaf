@@ -1,16 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-    <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
-        <stop offset="0" stop-color="#6B7280"></stop>
-        <stop offset=".3" stop-color="#6B7280" stop-opacity=".9"></stop>
-        <stop offset=".6" stop-color="#6B7280" stop-opacity=".6"></stop>
-        <stop offset=".8" stop-color="#6B7280" stop-opacity=".3"></stop>
-        <stop offset="1" stop-color="#6B7280" stop-opacity="0"></stop>
-    </radialGradient>
-    <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round"
-        stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
-        <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0"
-            keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
-    </circle>
-    <circle transform-origin="center" fill="none" opacity=".2" stroke="#6B7280" stroke-width="15" stroke-linecap="round"
-        cx="100" cy="100" r="70"></circle>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+    <g stroke="#6B7280">
+        <circle cx="12" cy="12" r="9.5" fill="none" stroke-linecap="round" stroke-width="2">
+            <animate attributeName="stroke-dasharray" calcMode="spline" dur="1.125s"
+                keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1" keyTimes="0;0.475;0.95;1"
+                repeatCount="indefinite" values="0 150;42 150;42 150;42 150" />
+            <animate attributeName="stroke-dashoffset" calcMode="spline" dur="1.125s"
+                keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1" keyTimes="0;0.475;0.95;1"
+                repeatCount="indefinite" values="0;-16;-59;-59" />
+        </circle>
+        <animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate"
+            values="0 12 12;360 12 12" />
+    </g>
 </svg>
