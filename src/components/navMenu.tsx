@@ -76,15 +76,7 @@ export default function NavMenu() {
               فهرس الأجزاء
             </Link>
           </li>
-          <li>
-            <Link
-              href="/about"
-              className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
-              onClick={() => setIsOpen(false)}
-            >
-              حول الموقع
-            </Link>
-          </li>
+
           <li>
             <Link
               href="/contact"
@@ -96,6 +88,15 @@ export default function NavMenu() {
           </li>
           <li>
             <Link
+              href="/about"
+              className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
+              onClick={() => setIsOpen(false)}
+            >
+              حول الموقع
+            </Link>
+          </li>
+          {/*  <li>
+            <Link
               href="/download-offline"
               className="block py-2 pr-2 hover:bg-gray-700 rounded-md"
               onClick={() => {
@@ -104,7 +105,7 @@ export default function NavMenu() {
             >
               تنزيل المعطيات
             </Link>
-          </li>
+          </li> */}
         </ul>
         <span className="fixed bottom-0 right-0 p-2 bg-gray-700 text-sm text-gray-400 rounded-tl-md shadow-lg z-30">
           الإصدار: {appVersion}

@@ -1,5 +1,3 @@
-import DownloadOfflinePage from './downloadOfflinePage'
-
 export async function generateMetadata() {
   const title = 'Open-Mushaf - Download Offline'
   const description = 'تنزيل المعطيات'
@@ -16,5 +14,7 @@ export async function generateMetadata() {
 }
 
 export default function Page() {
-  return <DownloadOfflinePage />
+  /* return <DownloadOfflinePage /> */
+
+  return <></>
 }
