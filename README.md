@@ -2,6 +2,7 @@
 
 ![GitHub Stars](https://img.shields.io/github/stars/adelpro/open-mushaf?style=social)
 ![Forks](https://img.shields.io/github/forks/adelpro/open-mushaf)
+[![Twitter Follow](https://img.shields.io/twitter/follow/adelpro?style=social)](https://twitter.com/adelpro)
 
 ![Version](https://img.shields.io/github/package-json/v/adelpro/open-mushaf)
 ![Contributors](https://img.shields.io/github/contributors/adelpro/open-mushaf)
